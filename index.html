@@ -1,4 +1,204 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anuncio Oficial</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      overflow: hidden;
+    }
+
+    .announcement {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .announcement-box {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      position: relative;
+      animation: slideIn 0.5s ease-in-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(-50%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .profile-pic {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: 0 auto;
+      position: relative;
+      border: 3px solid #007bff;
+    }
+
+    .profile-pic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .verified {
+      position: absolute;
+      bottom: -10px;
+      right: -10px;
+      background: #007bff;
+      color: #fff;
+      border-radius: 50%;
+      padding: 6px;
+      font-size: 14px;
+      border: 2px solid #fff;
+    }
+
+    h2 {
+      margin-top: 15px;
+      font-size: 24px;
+      color: #333;
+    }
+
+    p {
+      color: #666;
+      margin: 10px 0 20px;
+      font-size: 16px;
+    }
+
+    .welcome {
+      font-size: 18px;
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+
+    .close-btn {
+      background: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .close-btn:hover {
+      background: #0056b3;
+    }
+
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <div class="announcement" id="announcement">
+    <div class="announcement-box">
+      <div class="profile-pic">
+        <img src="https://i.imgur.com/vsbX5W9.png" alt="CEO Stephanie Mejias">
+        <span class="verified">
+          <i class="fas fa-check"></i>
+        </span>
+      </div>
+      <h2>Stephanie Mejias</h2>
+      <p class="welcome">¡Bienvenida como la nueva CEO de DrakAsia!</p>
+      <p>Es un honor anunciar oficialmente este gran paso para nuestra empresa.</p>
+      <button class="close-btn" onclick="closeAnnouncement()">Quitar</button>
+    </div>
+  </div>
+
+  <canvas id="confetti" class="confetti"></canvas>
+
+  <script>
+    // Confetti Animation
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+    const colors = ['#007bff', '#ff4081', '#ffc107', '#4caf50', '#ff5722'];
+
+    function createParticle() {
+      const size = Math.random() * 10 + 5;
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: canvas.height + size,
+        size: size,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        speed: Math.random() * 3 + 2,
+        angle: Math.random() * Math.PI * 2,
+      });
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((particle, index) => {
+        ctx.fillStyle = particle.color;
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size / 2, 0, Math.PI * 2);
+        ctx.fill();
+        particle.y -= particle.speed;
+        particle.x += Math.sin(particle.angle) * 2;
+        if (particle.y < -particle.size) particles.splice(index, 1);
+      });
+    }
+
+    function loop() {
+      createParticle();
+      drawParticles();
+      requestAnimationFrame(loop);
+    }
+
+    loop();
+
+    // Close Announcement
+    function closeAnnouncement() {
+      document.getElementById('announcement').style.display = 'none';
+      document.getElementById('confetti').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+<!DOCTYPE html>
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
