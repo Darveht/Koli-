@@ -3,51 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página No Disponible</title>
-    <!-- Fuente y Estilo -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <title>Página Bloqueada</title>
     <style>
         body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', sans-serif;
-            background: #000;
+            background-color: #000;
             color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            overflow: hidden;
-        }
-
-        .container {
             text-align: center;
         }
 
-        .container h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            color: #ff0050;
+        .container {
+            display: none;
         }
 
-        .container p {
-            font-size: 1.2rem;
+        .message {
+            display: none;
+            color: #ff0050;
+            font-size: 1.5rem;
+        }
+
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        .input-container input {
+            padding: 10px;
+            font-size: 1rem;
+            margin-top: 5px;
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 5px;
+        }
+
+        .input-container button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #ff0050;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .input-container button:hover {
+            background-color: #ff2a68;
+        }
+
+        .blocked {
+            display: block;
+            font-size: 1.5rem;
             color: #ccc;
         }
 
-        .container .icon {
-            font-size: 4rem;
+        .success {
+            font-size: 2rem;
             color: #00f2ea;
-            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="icon">🚫</div>
-        <h1>Página No Disponible</h1>
-        <p>Esta página está temporalmente fuera de servicio.</p>
+        <div class="success" id="successMessage">Acceso Permitido</div>
     </div>
+
+    <div class="input-container">
+        <h1>Introduce el Código de Acceso</h1>
+        <input type="text" id="accessCode" placeholder="Código de acceso">
+        <button onclick="checkAccess()">Acceder</button>
+        <p class="blocked" id="blockedMessage">Acceso Denegado. Código Incorrecto.</p>
+    </div>
+
+    <script>
+        // IMEI o código de acceso para permitir el acceso
+        const validAccessCode = '358540308749210'; // Aquí debes colocar el IMEI o código específico
+
+        function checkAccess() {
+            const enteredCode = document.getElementById('accessCode').value;
+
+            if (enteredCode === validAccessCode) {
+                document.getElementById('blockedMessage').style.display = 'none';
+                document.getElementById('successMessage').style.display = 'block';
+                document.querySelector('.input-container').style.display = 'none';
+            } else {
+                document.getElementById('blockedMessage').style.display = 'block';
+                document.getElementById('successMessage').style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>
 
