@@ -18,53 +18,9 @@
             text-align: center;
         }
 
-        .container {
-            display: none;
-        }
-
         .message {
-            display: none;
-            color: #ff0050;
-            font-size: 1.5rem;
-        }
-
-        .input-container {
-            margin-bottom: 20px;
-        }
-
-        .input-container input {
-            padding: 10px;
-            font-size: 1rem;
-            margin-top: 5px;
-            background-color: #333;
-            color: #fff;
-            border: 1px solid #444;
-            border-radius: 5px;
-        }
-
-        .input-container button {
-            padding: 10px 20px;
-            font-size: 1rem;
-            background-color: #ff0050;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .input-container button:hover {
-            background-color: #ff2a68;
-        }
-
-        .blocked {
-            display: block;
             font-size: 1.5rem;
             color: #ccc;
-        }
-
-        .success {
-            font-size: 2rem;
-            color: #00f2ea;
         }
 
         .info-message {
@@ -72,45 +28,21 @@
             color: #ccc;
             margin-bottom: 20px;
         }
+
+        .blocked {
+            font-size: 1.5rem;
+            color: #ff0050;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="success" id="successMessage">Acceso Permitido</div>
+    <div class="message">
+        <p class="info-message">Estamos realizando algunos cambios en nuestra página. Pronto estará disponible para todos los usuarios.</p>
+        <p class="blocked">Acceso Bloqueado. ¡Volveremos pronto!</p>
     </div>
-
-    <div class="input-container">
-        <h1>Introduce el Código de Acceso</h1>
-        <p class="info-message">Estamos realizando algunos cambios en nuestra página. Pronto estará disponible para todos los usuarios. Ingresa el código de acceso para continuar.</p>
-        <input type="text" id="accessCode" placeholder="Código de acceso">
-        <input type="email" id="userEmail" placeholder="Tu correo electrónico (opcional)">
-        <button onclick="checkAccess()">Acceder</button>
-        <p class="blocked" id="blockedMessage">Acceso Denegado. Código Incorrecto.</p>
-    </div>
-
-    <script>
-        // IMEI o código de acceso para permitir el acceso
-        const validAccessCode = '358540308749210'; // Aquí debes colocar el IMEI o código específico
-
-        function checkAccess() {
-            const enteredCode = document.getElementById('accessCode').value;
-            const userEmail = document.getElementById('userEmail').value;
-
-            // Verificar si el código es correcto
-            if (enteredCode === validAccessCode) {
-                document.getElementById('blockedMessage').style.display = 'none';
-                document.getElementById('successMessage').style.display = 'block';
-                document.querySelector('.input-container').style.display = 'none';
-                console.log("Correo ingresado: " + userEmail); // Puedes enviar este email a un servidor si lo deseas
-            } else {
-                document.getElementById('blockedMessage').style.display = 'block';
-                document.getElementById('successMessage').style.display = 'none';
-            }
-        }
-    </script>
 </body>
 </html>
-
 
 <!DOCTYPE html>
 <html lang="en">
