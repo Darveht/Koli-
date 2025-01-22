@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -66,6 +67,12 @@
             font-size: 2rem;
             color: #00f2ea;
         }
+
+        .info-message {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -75,7 +82,9 @@
 
     <div class="input-container">
         <h1>Introduce el Código de Acceso</h1>
+        <p class="info-message">Estamos realizando algunos cambios en nuestra página. Pronto estará disponible para todos los usuarios. Ingresa el código de acceso para continuar.</p>
         <input type="text" id="accessCode" placeholder="Código de acceso">
+        <input type="email" id="userEmail" placeholder="Tu correo electrónico (opcional)">
         <button onclick="checkAccess()">Acceder</button>
         <p class="blocked" id="blockedMessage">Acceso Denegado. Código Incorrecto.</p>
     </div>
@@ -86,11 +95,14 @@
 
         function checkAccess() {
             const enteredCode = document.getElementById('accessCode').value;
+            const userEmail = document.getElementById('userEmail').value;
 
+            // Verificar si el código es correcto
             if (enteredCode === validAccessCode) {
                 document.getElementById('blockedMessage').style.display = 'none';
                 document.getElementById('successMessage').style.display = 'block';
                 document.querySelector('.input-container').style.display = 'none';
+                console.log("Correo ingresado: " + userEmail); // Puedes enviar este email a un servidor si lo deseas
             } else {
                 document.getElementById('blockedMessage').style.display = 'block';
                 document.getElementById('successMessage').style.display = 'none';
@@ -99,7 +111,6 @@
     </script>
 </body>
 </html>
-
 
 <!DOCTYPE html>
 <html lang="en">
