@@ -8,13 +8,14 @@
   <meta name="description" content="Página oficial de DrakAsia que integra Política de Privacidad, Anuncio Oficial, DrakAsia Premium y K-DramaWiki. No se recopilan datos, es 100% informativa y apta para móviles.">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://www.tu-dominio.com/">
-  <!-- Content Security Policy: se utiliza un nonce (myNonce) para scripts y estilos inline -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdnjs.cloudflare.com https://cdn.tailwindcss.com; style-src 'self' 'nonce-myNonce' https://cdnjs.cloudflare.com https://cdn.tailwindcss.com; script-src 'self' 'nonce-myNonce'; img-src 'self' https: data:;">
-  <!-- Fuentes de iconos y Tailwind CSS -->
+  <!-- Content Security Policy (ajusta los orígenes según tu dominio y necesidades) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdnjs.cloudflare.com https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.tailwindcss.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com;">
+  <!-- Fuentes de iconos y Tailwind CSS (tal como en el código original) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous">
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Estilos combinados (se conservan los originales) -->
-  <style nonce="myNonce">
+
+  <!-- Se combinan (sin quitar) los estilos originales de cada sección -->
+  <style>
     /* ===== Política de Privacidad ===== */
     body {
       font-family: Arial, sans-serif;
@@ -391,6 +392,7 @@
 <body class="kdrama-body">
   <!-- ===== Sección: Política de Privacidad ===== -->
   <section id="privacy-section">
+    <!-- (Código original sin quitar nada) -->
     <div class="privacy-arrow" id="privacyArrow">
       <i class="fas fa-arrow-left"></i>
     </div>
@@ -425,8 +427,7 @@
         <h2 class="announcement-title">Stephanie Mejias</h2>
         <p class="welcome">¡Bienvenida como la nueva CEO de DrakAsia!</p>
         <p class="announcement-text">Es un honor anunciar oficialmente este gran paso para nuestra empresa.</p>
-        <!-- Se remueve el onclick inline; se asigna un id -->
-        <button class="close-btn" id="announcementCloseBtn">Quitar</button>
+        <button class="close-btn" onclick="closeAnnouncement()">Quitar</button>
       </div>
     </div>
     <canvas id="confetti" class="confetti"></canvas>
@@ -434,11 +435,10 @@
 
   <!-- ===== Sección: DrakAsia Premium ===== -->
   <section id="premium-section">
-    <!-- Se remueven los onclick inline; se asignan ids -->
-    <div class="icon-button icon-premium" id="openPremiumModalBtn">
+    <div class="icon-button icon-premium" onclick="openPremiumModal()">
       <i class="fas fa-crown"></i>
     </div>
-    <div class="icon-button icon-privacy" id="togglePrivacyBtn">
+    <div class="icon-button icon-privacy" onclick="togglePrivacy()">
       <i class="fas fa-user-shield"></i>
     </div>
     <div class="modal" id="premiumModal">
@@ -450,8 +450,7 @@
         <li>Modo sin conexión</li>
         <li>Eliminación de anuncios</li>
       </ul>
-      <!-- Se asigna id en lugar de onclick inline -->
-      <button id="activatePremiumBtn">Activar Prueba Gratuita</button>
+      <button onclick="activatePremium()">Activar Prueba Gratuita</button>
     </div>
     <div class="notification" id="notification"></div>
   </section>
@@ -492,7 +491,7 @@
     </div>
     <div id="moderators-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div class="bg-gray-800 p-6 rounded-lg w-full h-full max-h-screen overflow-y-auto relative">
-        <button class="absolute top-4 right-4 text-white text-2xl" id="closeModalBtn">
+        <button class="absolute top-4 right-4 text-white text-2xl" id="close-modal">
           <i class="fas fa-times"></i>
         </button>
         <h2 class="text-2xl font-bold text-cyan-400 mb-6">Moderadores</h2>
@@ -504,319 +503,283 @@
     </div>
   </section>
 
-  <!-- ===== Scripts: se agregan todos los event listeners sin inline handlers; cada bloque tiene nonce="myNonce" ===== -->
-  <script nonce="myNonce">
+  <!-- ===== Scripts ===== -->
+  <script>
     /* --- Política de Privacidad --- */
-    (function(){
-      const privacyArrow = document.getElementById('privacyArrow');
-      const privacyIcon = document.getElementById('privacyIcon');
-      const privacyModal = document.getElementById('privacyModal');
-      const closeModal = document.getElementById('closeModal');
-      privacyArrow.addEventListener('click', () => { privacyIcon.classList.toggle('active'); });
-      privacyIcon.addEventListener('click', () => { privacyModal.classList.add('active'); });
-      closeModal.addEventListener('click', () => { privacyModal.classList.remove('active'); });
-      window.addEventListener('click', (e) => { if (e.target === privacyModal) privacyModal.classList.remove('active'); });
-    })();
-  </script>
+    const privacyArrow = document.getElementById('privacyArrow');
+    const privacyIcon = document.getElementById('privacyIcon');
+    const privacyModal = document.getElementById('privacyModal');
+    const closeModal = document.getElementById('closeModal');
+    privacyArrow.addEventListener('click', () => { privacyIcon.classList.toggle('active'); });
+    privacyIcon.addEventListener('click', () => { privacyModal.classList.add('active'); });
+    closeModal.addEventListener('click', () => { privacyModal.classList.remove('active'); });
+    window.addEventListener('click', (e) => { if (e.target === privacyModal) privacyModal.classList.remove('active'); });
 
-  <script nonce="myNonce">
     /* --- Anuncio Oficial --- */
-    (function(){
-      const canvas = document.getElementById('confetti');
-      if (canvas) {
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        const particles = [];
-        const colors = ['#007bff', '#ff4081', '#ffc107', '#4caf50', '#ff5722'];
-        function createParticle() {
-          const size = Math.random() * 10 + 5;
-          particles.push({
-            x: Math.random() * canvas.width,
-            y: canvas.height + size,
-            size: size,
-            color: colors[Math.floor(Math.random() * colors.length)],
-            speed: Math.random() * 3 + 2,
-            angle: Math.random() * Math.PI * 2,
-          });
-        }
-        function drawParticles() {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          particles.forEach((particle, index) => {
-            ctx.fillStyle = particle.color;
-            ctx.beginPath();
-            ctx.arc(particle.x, particle.y, particle.size / 2, 0, Math.PI * 2);
-            ctx.fill();
-            particle.y -= particle.speed;
-            particle.x += Math.sin(particle.angle) * 2;
-            if (particle.y < -particle.size) particles.splice(index, 1);
-          });
-        }
-        function loop() { createParticle(); drawParticles(); requestAnimationFrame(loop); }
-        loop();
-      }
-      window.closeAnnouncement = function() {
-        document.getElementById('announcement').style.display = 'none';
-        if (canvas) canvas.style.display = 'none';
-      }
-      document.getElementById('announcementCloseBtn').addEventListener('click', closeAnnouncement);
-    })();
-  </script>
-
-  <script nonce="myNonce">
-    /* --- DrakAsia Premium --- */
-    (function(){
-      function showNotification(message) {
-        const notification = document.getElementById('notification');
-        notification.textContent = message;
-        notification.style.display = 'block';
-        setTimeout(() => { notification.style.display = 'none'; }, 3000);
-      }
-      window.addEventListener('offline', () => {
-        const isPremiumActive = localStorage.getItem('premiumActive');
-        if (isPremiumActive) { showNotification('Modo sin conexión activado.'); }
-        else { document.body.innerHTML = '<h1 style="text-align:center;color:white;margin-top:20%;">Necesitas Premium para modo sin conexión.</h1>'; }
-      });
-      function openPremiumModal() {
-        const isPremiumActive = localStorage.getItem('premiumActive');
-        if (isPremiumActive) { showNotification('Ya tienes Premium activo.'); }
-        else { document.getElementById('premiumModal').style.display = 'block'; }
-      }
-      function activatePremium() {
-        localStorage.setItem('premiumActive', 'true');
-        localStorage.setItem('premiumStartDate', new Date().toISOString());
-        showNotification('¡Prueba gratuita activada!');
-        document.getElementById('premiumModal').style.display = 'none';
-      }
-      function togglePrivacy() {
-        const currentStatus = localStorage.getItem('privacyStatus') || 'public';
-        const newStatus = currentStatus === 'public' ? 'private' : 'public';
-        localStorage.setItem('privacyStatus', newStatus);
-        showNotification(`Cuenta ahora en modo ${newStatus}.`);
-      }
-      document.getElementById('openPremiumModalBtn').addEventListener('click', openPremiumModal);
-      document.getElementById('togglePrivacyBtn').addEventListener('click', togglePrivacy);
-      document.getElementById('activatePremiumBtn').addEventListener('click', activatePremium);
-    })();
-  </script>
-
-  <script nonce="myNonce">
-    /* --- K-DramaWiki --- */
-    (function(){
-      class KDramaWiki {
-        constructor() {
-          this.series = [];
-          this.actors = {};
-          this.initEventListeners();
-        }
-        initEventListeners() {
-          document.getElementById('closeDetailModal').addEventListener('click', () => this.closeDetailModal());
-          document.getElementById('searchBtn').addEventListener('click', () => this.searchSeries());
-          document.getElementById('searchInput').addEventListener('input', () => this.searchSeries());
-        }
-        closeDetailModal() {
-          const modal = document.getElementById('seriesDetailModal');
-          modal.classList.add('hidden');
-        }
-        renderSeries(filteredSeries = this.series) {
-          const grid = document.getElementById('seriesGrid');
-          grid.innerHTML = '';
-          filteredSeries.forEach(series => {
-            const seriesCard = document.createElement('div');
-            seriesCard.classList.add('series-card', 'relative', 'cursor-pointer');
-            seriesCard.innerHTML = `<img src="${series.coverImage}" class="w-full h-64 object-cover rounded-lg">
-              <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black to-transparent">
-                <h3 class="text-lg font-bold">${series.title}</h3>
-                <p class="text-sm">${series.director}</p>
-              </div>`;
-            seriesCard.addEventListener('click', () => this.showSeriesDetails(series));
-            grid.appendChild(seriesCard);
-          });
-        }
-        showSeriesDetails(series) {
-          const modal = document.getElementById('seriesDetailModal');
-          const content = document.getElementById('seriesDetailContent');
-          // Se elimina el onclick inline en actores; se usa data-attribute
-          content.innerHTML = `<div class="relative">
-              <img src="${series.coverImage}" class="w-full h-96 object-cover rounded-lg mb-4 glowing-border">
-              <div class="flex justify-between items-center mb-4">
-                <h2 class="text-3xl font-bold text-cyan-400">${series.title}</h2>
-              </div>
-              <div class="flex items-center mb-4">
-                <div class="text-white text-sm">
-                  <strong>Director:</strong> ${series.director}
-                </div>
-                <div class="text-white text-sm ml-4">
-                  <strong>País:</strong> ${series.pais}
-                </div>
-              </div>
-              <strong>Año:</strong> ${series.year}
-            </div>
-            <p class="text-white mb-4">${series.synopsis}</p>
-            <h3 class="text-xl text-cyan-400 mb-2">Actores</h3>
-            <div class="flex flex-wrap">
-              ${series.actors.map(actor => `
-                <div class="actor-profile" data-actor-name="${actor.name}">
-                  <img src="${actor.photo}" alt="${actor.name}">
-                  <p class="text-white">${actor.name}</p>
-                </div>
-              `).join('')}
-            </div>
-            <h3 class="text-xl text-cyan-400 mb-2 mt-4">Calificación</h3>
-            <div class="stars" id="stars">
-              ${[1, 2, 3, 4, 5].map(i => `<span class="star" data-value="${i}">&#9733;</span>`).join('')}
-            </div>`;
-          modal.classList.remove('hidden');
-          // Agregar event listeners a los actores (sin inline onclick)
-          document.querySelectorAll('.actor-profile').forEach(el => {
-            el.addEventListener('click', () => {
-              const actorName = el.getAttribute('data-actor-name');
-              showActorSeries(actorName);
-            });
-          });
-          // Event listener para las estrellas
-          document.querySelectorAll('.star').forEach(star => {
-            star.addEventListener('click', () => this.rateSeries(star));
-          });
-          // Event listener para el follow (ya asignado en HTML)
-          document.getElementById('followIcon').addEventListener('click', () => {
-            const followSuccess = document.getElementById('followSuccess');
-            followSuccess.style.display = 'block';
-            setTimeout(() => { followSuccess.style.display = 'none'; }, 2000);
-          });
-        }
-        rateSeries(star) {
-          const stars = document.querySelectorAll('.star');
-          stars.forEach(st => st.classList.remove('active'));
-          for (let i = 1; i <= star.dataset.value; i++) {
-            stars[i - 1].classList.add('active');
-          }
-        }
-        searchSeries() {
-          const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-          const filteredSeries = this.series.filter(series =>
-            series.title.toLowerCase().includes(searchTerm) ||
-            series.actors.some(actor => actor.name.toLowerCase().includes(searchTerm))
-          );
-          this.renderSeries(filteredSeries);
-        }
-      }
-      window.showActorSeries = function(name) {
-        // Función de ejemplo para mostrar detalles del actor
-        alert("Detalles del actor: " + name);
-      }
-      const wiki = new KDramaWiki();
-      wiki.series = [
-        {
-          "title": "Amor en la puerta de al lado",
-          "director": "Yoo Je-won",
-          "pais": "Corea del Sur",
-          "year": 2024,
-          "synopsis": "Una mujer que intenta rehacer su vida vuelve a Corea y se reencuentra con un amigo de la infancia, con quien comparte una historia complicada.",
-          "coverImage": "https://ultimasnoticias.com.ve/wp-content/uploads/2024/10/LOVE-NEXT-DOOR1-scaled.jpg",
-          "Etiqueta": "Corea del Sur",
-          "actors": [
-            { "name": "Jung Hae-in", "photo": "https://1.vikiplatform.com/l/3069127l/78a2ce69f0.jpg?x=b&s=480x270&e=t&q=g", "role": "Moderador" },
-            { "name": "Jung So-min", "photo": "https://1.vikiplatform.com/pr/14304pr/081b9b2968.jpg?x=b", "role": "Moderador" }
-          ]
-        },
-        {
-          "title": "Descendants of the Sun",
-          "director": "Lee Eung-bok",
-          "year": 2016,
-          "synopsis": "Un soldado y una doctora se enamoran mientras enfrentan peligros.",
-          "coverImage": "https://images.justwatch.com/poster/202546506/s718/descendants-of-the-sun.jpg",
-          "actors": [
-            { "name": "Song Joong-ki", "photo": "https://1.vikiplatform.com/pr/14866pr/62eb4af4e2.jpg?x=b" },
-            { "name": "Song Hye-kyo", "photo": "https://cdn.antaranews.com/cache/1200x800/2019/04/16/song.jpg" },
-            { "name": "Jin Goo", "photo": "https://1.vikiplatform.com/pr/15589pr/0973e276e0.jpg?x=b" },
-            { "name": "Kim Ji-won", "photo": "https://1.vikiplatform.com/pr/14221pr/6c16816ae3.jpg?x=b" },
-            { "name": "Onew", "photo": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Onew_Marie_Claire_Korea_April_2022.png" },
-            { "name": "Kim Min-seok", "photo": "https://1.vikiplatform.com/pr/15341pr/4185e35ce8.jpg?x=b" }
-          ]
-        }
-      ];
-      wiki.renderSeries();
-    })();
-  </script>
-
-  <script nonce="myNonce">
-    /* --- Moderadores --- */
-    (function(){
-      const moderators = [
-        { name: "Darell Vega", role: "Fundador", titlesCount: 78, imgSrc: "https://m.media-amazon.com/images/S/pv-target-images/80d21af2c4f9fb94460aadf6f0d73b52e91a18d1c9de0fe09e69ac8034a809e9._SX300_.jpg", verified: true },
-        { name: "uchihashisui2024", role: "Fundador", titlesCount: 0, imgSrc: "https://i.redd.it/qg3hmf3u44v91.jpg", verified: true },
-        { name: "Samuel Marin", role: "Fundador", titlesCount: 0, imgSrc: "https://i.pinimg.com/736x/e7/75/ec/e775ecc20a2b9930ca9e7ee62ba05fd7.jpg", verified: true },
-        { name: "Emily Torres", role: "Moderador", titlesCount: 5, imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMcommjJ4uxDMd3Vsus3Nl-6WV_w-w3BUfCA&s", verified: false },
-        { name: "amy-70", role: "Moderador", titlesCount: 33, imgSrc: "https://occ-0-8407-1722.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABbJIAbkjHS4QoHR0rs2bMGYAZLRYbWwpDFdg57FzmnBhyB3rZJ7FL-9HWUPvFWCj-UHxTJRBPuFzTdy6vEBmMmg0UvFJnuiB83AW.jpg?r=f44", verified: false },
-        { name: "Rafael Lauro", role: "Moderador", titlesCount: 0, imgSrc: "https://cdn.pixabay.com/photo/2021/06/07/19/23/kakashi-6318812_1280.jpg", verified: false },
-        { name: "Carlos Méndez", role: "Moderador", titlesCount: 3, imgSrc: "https://i.pinimg.com/736x/0a/64/75/0a64753f3398b81f5898b09463a5e6be.jpg", verified: false },
-        { name: "Taty_395", role: "Moderador", titlesCount: 126, imgSrc: "https://i.mydramalist.com/67r8d_5c.jpg", verified: false },
-        { name: "Sariblood_33", role: "Moderador", titlesCount: 0, imgSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/20220226_Kim_Se-jeong_%EA%B9%80%EC%84%B8%EC%A0%95_for_Marie_Claire_Korea.jpg/170px-20220226_Kim_Se-jeong_%EA%B9%80%EC%84%B8%EC%A0%95_for_Marie_Claire_Korea.jpg", verified: false },
-        { name: "sejo_28", role: "Moderador", titlesCount: 78, imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPHe-4631dB309LoB7ooqusqbNHD2zxk8x3g&s", verified: false },
-        { name: "rp_vp", role: "Moderador", titlesCount: 61, imgSrc: "https://media.vogue.mx/photos/6410cf873f370ce21019f8e6/2:3/w_2560%2Cc_limit/la-gloria-song-hye-kyo.jpg", verified: false }
-      ];
-      function sortModeratorsByTitles() { return moderators.sort((a, b) => b.titlesCount - a.titlesCount); }
-      function showModerators(searchQuery = "") {
-        const moderatorsList = document.getElementById('moderators-list');
-        moderatorsList.innerHTML = "";
-        const filteredModerators = sortModeratorsByTitles().filter(moderator => moderator.name.toLowerCase().includes(searchQuery.toLowerCase()));
-        filteredModerators.forEach((moderator, index) => {
-          const moderatorItem = document.createElement('div');
-          moderatorItem.className = "flex items-center bg-gray-700 p-4 rounded-lg relative";
-          let verificationIcon = moderator.verified 
-              ? `<img src="https://cdn-icons-png.flaticon.com/128/5556/5556625.png" alt="Verificado" class="w-6 h-6 mr-4">`
-              : '';
-          let roleIcon = moderator.role === "Fundador"
-              ? `<img src="https://cdn-icons-png.flaticon.com/512/11476/11476491.png" alt="Fundador" class="w-8 h-8 mr-4 transform scale-125">`
-              : `<img src="https://cdn-icons-png.flaticon.com/128/5556/5556625.png" alt="Moderador" class="w-6 h-6 mr-4">`;
-          const roleLabel = moderator.role === "Moderador" 
-              ? `<span class="bg-cyan-400 text-white px-2 py-1 text-xs rounded-full ml-2">Moderador</span>`
-              : `<span class="bg-red-500 text-white px-2 py-1 text-xs rounded-full ml-2">Fundador</span>`;
-          const titlesCount = `<span class="text-sm text-gray-300 mt-2">Colaboró con ${moderator.titlesCount} títulos</span>`;
-          moderatorItem.innerHTML = `
-              ${roleIcon}
-              <img src="${moderator.imgSrc}" alt="${moderator.name}" class="w-14 h-14 rounded-full object-cover mr-4">
-              <div class="flex-grow">
-                  <p class="font-bold text-lg text-cyan-400">${moderator.name} ${roleLabel}</p>
-                  ${titlesCount}
-              </div>
-              ${verificationIcon}
-          `;
-          if (index === 0) {
-            moderatorItem.innerHTML += `<span class="top-1-label absolute top-2 left-2 bg-yellow-500 text-white px-3 py-1 text-xs rounded-full">Top 1</span>`;
-          } else if (index === 1) {
-            moderatorItem.innerHTML += `<span class="top-2-label absolute top-2 left-2 bg-silver-500 text-white px-3 py-1 text-xs rounded-full">Top 2</span>`;
-          } else if (index === 2) {
-            moderatorItem.innerHTML += `<span class="top-3-label absolute top-2 left-2 bg-bronze-500 text-white px-3 py-1 text-xs rounded-full">Top 3</span>`;
-          }
-          moderatorsList.appendChild(moderatorItem);
+    const canvas = document.getElementById('confetti');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const particles = [];
+      const colors = ['#007bff', '#ff4081', '#ffc107', '#4caf50', '#ff5722'];
+      function createParticle() {
+        const size = Math.random() * 10 + 5;
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: canvas.height + size,
+          size: size,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          speed: Math.random() * 3 + 2,
+          angle: Math.random() * Math.PI * 2,
         });
-        const top1 = document.querySelectorAll('.top-1-label');
-        const top2 = document.querySelectorAll('.top-2-label');
-        const top3 = document.querySelectorAll('.top-3-label');
-        top1.forEach(el => { el.classList.add('animate__animated', 'animate__bounceIn'); });
-        top2.forEach(el => { el.classList.add('animate__animated', 'animate__bounceIn'); });
-        top3.forEach(el => { el.classList.add('animate__animated', 'animate__bounceIn'); });
       }
-      document.getElementById('moderators-icon').addEventListener('click', () => {
-        showModerators();
-        document.getElementById('moderators-modal').classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-      });
-      document.getElementById('closeModalBtn').addEventListener('click', () => {
-        document.getElementById('moderators-modal').classList.add('hidden');
-        document.body.style.overflow = 'auto';
-      });
-      document.getElementById('moderator-search').addEventListener('input', (event) => {
-        const searchQuery = event.target.value;
-        showModerators(searchQuery);
-      });
-      window.onload = showModerators;
-    })();
-  </script>
+      function drawParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach((particle, index) => {
+          ctx.fillStyle = particle.color;
+          ctx.beginPath();
+          ctx.arc(particle.x, particle.y, particle.size / 2, 0, Math.PI * 2);
+          ctx.fill();
+          particle.y -= particle.speed;
+          particle.x += Math.sin(particle.angle) * 2;
+          if (particle.y < -particle.size) particles.splice(index, 1);
+        });
+      }
+      function loop() { createParticle(); drawParticles(); requestAnimationFrame(loop); }
+      loop();
+    }
+    function closeAnnouncement() {
+      document.getElementById('announcement').style.display = 'none';
+      if (canvas) canvas.style.display = 'none';
+    }
 
-  <!-- Carga de Animate.css para las animaciones en moderadores -->
-  <link nonce="myNonce" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    /* --- DrakAsia Premium --- */
+    function openPremiumModal() {
+      const isPremiumActive = localStorage.getItem('premiumActive');
+      if (isPremiumActive) { showNotification('Ya tienes Premium activo.'); }
+      else { document.getElementById('premiumModal').style.display = 'block'; }
+    }
+    function activatePremium() {
+      localStorage.setItem('premiumActive', 'true');
+      localStorage.setItem('premiumStartDate', new Date().toISOString());
+      showNotification('¡Prueba gratuita activada!');
+      document.getElementById('premiumModal').style.display = 'none';
+    }
+    function togglePrivacy() {
+      const currentStatus = localStorage.getItem('privacyStatus') || 'public';
+      const newStatus = currentStatus === 'public' ? 'private' : 'public';
+      localStorage.setItem('privacyStatus', newStatus);
+      showNotification(`Cuenta ahora en modo ${newStatus}.`);
+    }
+    window.addEventListener('offline', () => {
+      const isPremiumActive = localStorage.getItem('premiumActive');
+      if (isPremiumActive) { showNotification('Modo sin conexión activado.'); }
+      else { document.body.innerHTML = '<h1 style="text-align:center;color:white;margin-top:20%;">Necesitas Premium para modo sin conexión.</h1>'; }
+    });
+    function showNotification(message) {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.style.display = 'block';
+      setTimeout(() => { notification.style.display = 'none'; }, 3000);
+    }
+
+    /* --- K-DramaWiki --- */
+    class KDramaWiki {
+      constructor() {
+        this.series = [];
+        this.actors = {};
+        this.initEventListeners();
+      }
+      initEventListeners() {
+        document.getElementById('closeDetailModal').addEventListener('click', () => this.closeDetailModal());
+        document.getElementById('searchBtn').addEventListener('click', () => this.searchSeries());
+        document.getElementById('searchInput').addEventListener('input', () => this.searchSeries());
+      }
+      closeDetailModal() {
+        const modal = document.getElementById('seriesDetailModal');
+        modal.classList.add('hidden');
+      }
+      renderSeries(filteredSeries = this.series) {
+        const grid = document.getElementById('seriesGrid');
+        grid.innerHTML = '';
+        filteredSeries.forEach(series => {
+          const seriesCard = document.createElement('div');
+          seriesCard.classList.add('series-card', 'relative', 'cursor-pointer');
+          seriesCard.innerHTML = `<img src="${series.coverImage}" class="w-full h-64 object-cover rounded-lg">
+                        <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black to-transparent">
+                            <h3 class="text-lg font-bold">${series.title}</h3>
+                            <p class="text-sm">${series.director}</p>
+                        </div>`;
+          seriesCard.addEventListener('click', () => this.showSeriesDetails(series));
+          grid.appendChild(seriesCard);
+        });
+      }
+      showSeriesDetails(series) {
+        const modal = document.getElementById('seriesDetailModal');
+        const content = document.getElementById('seriesDetailContent');
+        content.innerHTML = `<div class="relative">
+                        <img src="${series.coverImage}" class="w-full h-96 object-cover rounded-lg mb-4 glowing-border">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-3xl font-bold text-cyan-400">${series.title}</h2>
+                       </div>
+<div class="flex items-center mb-4">
+    <div class="text-white text-sm">
+        <strong>Director:</strong> ${series.director}
+    </div>
+    <div class="text-white text-sm ml-4">
+        <strong>País:</strong> ${series.pais}
+    </div>
+</div>
+<strong>Año:</strong> ${series.year}
+                                <strong>Año:</strong> ${series.year}
+                            </div>
+                        </div>
+                        <p class="text-white mb-4">${series.synopsis}</p>
+                        <h3 class="text-xl text-cyan-400 mb-2">Actores</h3>
+                        <div class="flex flex-wrap">
+                            ${series.actors.map(actor => `<div class="actor-profile" onclick="showActorSeries('${actor.name}')">
+                                    <img src="${actor.photo}" alt="${actor.name}">
+                                    <p class="text-white">${actor.name}</p>
+                                </div>`).join('')}
+                        </div>
+                        <h3 class="text-xl text-cyan-400 mb-2 mt-4">Calificación</h3>
+                        <div class="stars" id="stars">
+                            ${[1, 2, 3, 4, 5].map(i => `<span class="star" data-value="${i}">&#9733;</span>`).join('')}
+                        </div>
+                    </div>`;
+        modal.classList.remove('hidden');
+        const followIcon = document.getElementById('followIcon');
+        const followSuccess = document.getElementById('followSuccess');
+        followIcon.addEventListener('click', () => {
+          followSuccess.style.display = 'block';
+          setTimeout(() => { followSuccess.style.display = 'none'; }, 2000);
+        });
+        document.querySelectorAll('.star').forEach(star => {
+          star.addEventListener('click', () => this.rateSeries(star));
+        });
+      }
+      rateSeries(star) {
+        const stars = document.querySelectorAll('.star');
+        stars.forEach(st => st.classList.remove('active'));
+        for (let i = 1; i <= star.dataset.value; i++) {
+          stars[i - 1].classList.add('active');
+        }
+      }
+      searchSeries() {
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const filteredSeries = this.series.filter(series =>
+          series.title.toLowerCase().includes(searchTerm) ||
+          series.actors.some(actor => actor.name.toLowerCase().includes(searchTerm))
+        );
+        this.renderSeries(filteredSeries);
+      }
+    }
+    const wiki = new KDramaWiki();
+    wiki.series = [
+      {
+        "title": "Amor en la puerta de al lado",
+        "director": "Yoo Je-won",
+        "pais": "Corea del Sur",
+        "year": 2024,
+        "synopsis": "Una mujer que intenta rehacer su vida vuelve a Corea y se reencuentra con un amigo de la infancia, con quien comparte una historia complicada.",
+        "coverImage": "https://ultimasnoticias.com.ve/wp-content/uploads/2024/10/LOVE-NEXT-DOOR1-scaled.jpg",
+        "Etiqueta": "Corea del Sur",
+        "actors": [
+          { "name": "Jung Hae-in", "photo": "https://1.vikiplatform.com/l/3069127l/78a2ce69f0.jpg?x=b&s=480x270&e=t&q=g", "role": "Moderador" },
+          { "name": "Jung So-min", "photo": "https://1.vikiplatform.com/pr/14304pr/081b9b2968.jpg?x=b", "role": "Moderador" }
+        ]
+      },
+      {
+        title: "Descendants of the Sun",
+        director: "Lee Eung-bok",
+        year: 2016,
+        synopsis: "Un soldado y una doctora se enamoran mientras enfrentan peligros.",
+        coverImage: "https://images.justwatch.com/poster/202546506/s718/descendants-of-the-sun.jpg",
+        actors: [
+          { "name": "Song Joong-ki", "photo": "https://1.vikiplatform.com/pr/14866pr/62eb4af4e2.jpg?x=b" },
+          { "name": "Song Hye-kyo", "photo": "https://cdn.antaranews.com/cache/1200x800/2019/04/16/song.jpg" },
+          { "name": "Jin Goo", "photo": "https://1.vikiplatform.com/pr/15589pr/0973e276e0.jpg?x=b" },
+          { "name": "Kim Ji-won", "photo": "https://1.vikiplatform.com/pr/14221pr/6c16816ae3.jpg?x=b" },
+          { "name": "Onew", "photo": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Onew_Marie_Claire_Korea_April_2022.png" },
+          { "name": "Kim Min-seok", "photo": "https://1.vikiplatform.com/pr/15341pr/4185e35ce8.jpg?x=b" }
+        ]
+      }
+    ];
+    wiki.renderSeries();
+
+    /* --- Moderadores --- */
+    const moderators = [
+      { name: "Darell Vega", role: "Fundador", titlesCount: 78, imgSrc: "https://m.media-amazon.com/images/S/pv-target-images/80d21af2c4f9fb94460aadf6f0d73b52e91a18d1c9de0fe09e69ac8034a809e9._SX300_.jpg", verified: true },
+      { name: "uchihashisui2024", role: "Fundador", titlesCount: 0, imgSrc: "https://i.redd.it/qg3hmf3u44v91.jpg", verified: true },
+      { name: "Samuel Marin", role: "Fundador", titlesCount: 0, imgSrc: "https://i.pinimg.com/736x/e7/75/ec/e775ecc20a2b9930ca9e7ee62ba05fd7.jpg", verified: true },
+      { name: "Emily Torres", role: "Moderador", titlesCount: 5, imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMcommjJ4uxDMd3Vsus3Nl-6WV_w-w3BUfCA&s", verified: false },
+      { name: "amy-70", role: "Moderador", titlesCount: 33, imgSrc: "https://occ-0-8407-1722.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABbJIAbkjHS4QoHR0rs2bMGYAZLRYbWwpDFdg57FzmnBhyB3rZJ7FL-9HWUPvFWCj-UHxTJRBPuFzTdy6vEBmMmg0UvFJnuiB83AW.jpg?r=f44", verified: false },
+      { name: "Rafael Lauro", role: "Moderador", titlesCount: 0, imgSrc: "https://cdn.pixabay.com/photo/2021/06/07/19/23/kakashi-6318812_1280.jpg", verified: false },
+      { name: "Carlos Méndez", role: "Moderador", titlesCount: 3, imgSrc: "https://i.pinimg.com/736x/0a/64/75/0a64753f3398b81f5898b09463a5e6be.jpg", verified: false },
+      { name: "Taty_395", role: "Moderador", titlesCount: 126, imgSrc: "https://i.mydramalist.com/67r8d_5c.jpg", verified: false },
+      { name: "Sariblood_33", role: "Moderador", titlesCount: 0, imgSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/20220226_Kim_Se-jeong_%EA%B9%80%EC%84%B8%EC%A0%95_for_Marie_Claire_Korea.jpg/170px-20220226_Kim_Se-jeong_%EA%B9%80%EC%84%B8%EC%A0%95_for_Marie_Claire_Korea.jpg", verified: false },
+      { name: "sejo_28", role: "Moderador", titlesCount: 78, imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPHe-4631dB309LoB7ooqusqbNHD2zxk8x3g&s", verified: false },
+      { name: "rp_vp", role: "Moderador", titlesCount: 61, imgSrc: "https://media.vogue.mx/photos/6410cf873f370ce21019f8e6/2:3/w_2560%2Cc_limit/la-gloria-song-hye-kyo.jpg", verified: false }
+    ];
+    function sortModeratorsByTitles() { return moderators.sort((a, b) => b.titlesCount - a.titlesCount); }
+    function showModerators(searchQuery = "") {
+      const moderatorsList = document.getElementById('moderators-list');
+      moderatorsList.innerHTML = "";
+      const filteredModerators = sortModeratorsByTitles().filter(moderator => moderator.name.toLowerCase().includes(searchQuery.toLowerCase()));
+      filteredModerators.forEach((moderator, index) => {
+        const moderatorItem = document.createElement('div');
+        moderatorItem.className = "flex items-center bg-gray-700 p-4 rounded-lg relative";
+        let verificationIcon = moderator.verified 
+            ? `<img src="https://cdn-icons-png.flaticon.com/128/5556/5556625.png" alt="Verificado" class="w-6 h-6 mr-4">`
+            : '';
+        let roleIcon = moderator.role === "Fundador"
+            ? `<img src="https://cdn-icons-png.flaticon.com/512/11476/11476491.png" alt="Fundador" class="w-8 h-8 mr-4 transform scale-125">`
+            : `<img src="https://cdn-icons-png.flaticon.com/128/5556/5556625.png" alt="Moderador" class="w-6 h-6 mr-4">`;
+        const roleLabel = moderator.role === "Moderador" 
+            ? `<span class="bg-cyan-400 text-white px-2 py-1 text-xs rounded-full ml-2">Moderador</span>`
+            : `<span class="bg-red-500 text-white px-2 py-1 text-xs rounded-full ml-2">Fundador</span>`;
+        const titlesCount = `<span class="text-sm text-gray-300 mt-2">Colaboró con ${moderator.titlesCount} títulos</span>`;
+        moderatorItem.innerHTML = `
+            ${roleIcon}
+            <img src="${moderator.imgSrc}" alt="${moderator.name}" class="w-14 h-14 rounded-full object-cover mr-4">
+            <div class="flex-grow">
+                <p class="font-bold text-lg text-cyan-400">${moderator.name} ${roleLabel}</p>
+                ${titlesCount}
+            </div>
+            ${verificationIcon}
+        `;
+        if (index === 0) {
+          moderatorItem.innerHTML += `<span class="top-1-label absolute top-2 left-2 bg-yellow-500 text-white px-3 py-1 text-xs rounded-full">Top 1</span>`;
+        } else if (index === 1) {
+          moderatorItem.innerHTML += `<span class="top-2-label absolute top-2 left-2 bg-silver-500 text-white px-3 py-1 text-xs rounded-full">Top 2</span>`;
+        } else if (index === 2) {
+          moderatorItem.innerHTML += `<span class="top-3-label absolute top-2 left-2 bg-bronze-500 text-white px-3 py-1 text-xs rounded-full">Top 3</span>`;
+        }
+        moderatorsList.appendChild(moderatorItem);
+      });
+      const top1 = document.querySelectorAll('.top-1-label');
+      const top2 = document.querySelectorAll('.top-2-label');
+      const top3 = document.querySelectorAll('.top-3-label');
+      top1.forEach(el => { el.classList.add('animate__animated', 'animate__bounceIn'); });
+      top2.forEach(el => { el.classList.add('animate__animated', 'animate__bounceIn'); });
+      top3.forEach(el => { el.classList.add('animate__animated', 'animate__bounceIn'); });
+    }
+    document.getElementById('moderators-icon').addEventListener('click', () => {
+      showModerators();
+      document.getElementById('moderators-modal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    });
+    document.getElementById('close-modal').addEventListener('click', () => {
+      document.getElementById('moderators-modal').classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    });
+    document.getElementById('moderator-search').addEventListener('input', (event) => {
+      const searchQuery = event.target.value;
+      showModerators(searchQuery);
+    });
+    window.onload = showModerators;
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
 </body>
 </html>
