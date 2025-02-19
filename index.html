@@ -1,13 +1,22 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
+  <!-- Metaetiquetas básicas y de seguridad para evitar alertas de phishing -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Política de Privacidad</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <title>DrakAsia - Consolidado</title>
+  <meta name="description" content="Página oficial de DrakAsia que integra Política de Privacidad, Anuncio Oficial, DrakAsia Premium y K-DramaWiki. No se recopilan datos, es 100% informativa y apta para móviles.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://www.tu-dominio.com/">
+  <!-- Content Security Policy (ajusta los orígenes según tu dominio y necesidades) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdnjs.cloudflare.com https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.tailwindcss.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com;">
+  <!-- Fuentes de iconos y Tailwind CSS (tal como en el código original) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Se combinan (sin quitar) los estilos originales de cada sección -->
   <style>
-    /* General Styles */
+    /* ===== Política de Privacidad ===== */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -16,8 +25,6 @@
       color: #fff;
       overflow-x: hidden;
     }
-
-    /* Arrow Button */
     .privacy-arrow {
       position: fixed;
       top: 50%;
@@ -34,17 +41,8 @@
       transform: translateY(-50%);
       transition: transform 0.3s, background 0.3s;
     }
-
-    .privacy-arrow:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .privacy-arrow i {
-      color: #fff;
-      font-size: 20px;
-    }
-
-    /* Floating Icon */
+    .privacy-arrow:hover { background: rgba(255, 255, 255, 0.2); }
+    .privacy-arrow i { color: #fff; font-size: 20px; }
     .privacy-icon {
       position: fixed;
       top: 50%;
@@ -64,19 +62,12 @@
       transform: translateY(-50%) scale(0);
       transition: all 0.3s ease;
     }
-
     .privacy-icon.active {
       opacity: 1;
       pointer-events: all;
       transform: translateY(-50%) scale(1);
     }
-
-    .privacy-icon i {
-      color: #fff;
-      font-size: 24px;
-    }
-
-    /* Modal Styles */
+    .privacy-icon i { color: #fff; font-size: 24px; }
     .privacy-modal {
       position: fixed;
       top: 0;
@@ -89,11 +80,7 @@
       justify-content: center;
       z-index: 1100;
     }
-
-    .privacy-modal.active {
-      display: flex;
-    }
-
+    .privacy-modal.active { display: flex; }
     .modal-content {
       background: #1f1f1f;
       width: 90%;
@@ -105,28 +92,21 @@
       padding: 20px;
       position: relative;
     }
-
-    .modal-content::-webkit-scrollbar {
-      width: 8px;
-    }
-
+    .modal-content::-webkit-scrollbar { width: 8px; }
     .modal-content::-webkit-scrollbar-thumb {
       background: rgba(255, 255, 255, 0.3);
       border-radius: 10px;
     }
-
     .modal-content h2 {
       margin-top: 0;
       font-size: 24px;
       text-align: center;
     }
-
     .modal-content p {
       font-size: 14px;
       line-height: 1.6;
       margin-bottom: 10px;
     }
-
     .close-modal {
       position: absolute;
       top: 10px;
@@ -137,107 +117,21 @@
       border: none;
       cursor: pointer;
     }
+    .close-modal:hover { color: #f00; }
 
-    .close-modal:hover {
-      color: #f00;
-    }
-  </style>
-</head>
-<body>
-  <!-- Arrow Button -->
-  <div class="privacy-arrow" id="privacyArrow">
-    <i class="fas fa-arrow-left"></i>
-  </div>
-
-  <!-- Privacy Icon -->
-  <div class="privacy-icon" id="privacyIcon">
-    <i class="fas fa-shield-alt"></i>
-  </div>
-
-  <!-- Modal -->
-  <div class="privacy-modal" id="privacyModal">
-    <div class="modal-content">
-      <button class="close-modal" id="closeModal">&times;</button>
-      <h2>Política de Privacidad</h2>
-      <p>
-        Bienvenido a Drak Asia. Esta aplicación tiene como objetivo proporcionar información sobre series coreanas y contenido relacionado. Queremos asegurarte que no recopilamos datos de los usuarios ni requerimos registros.
-      </p>
-      <p>
-        <strong>Recopilación de Datos:</strong> No se realiza ninguna recopilación de datos personales. La aplicación es 100% informativa.
-      </p>
-      <p>
-        <strong>Uso de Cookies:</strong> No utilizamos cookies ni rastreamos la actividad del usuario.
-      </p>
-      <p>
-        <strong>Seguridad:</strong> Aunque no almacenamos información del usuario, mantenemos los estándares de seguridad para garantizar una experiencia confiable.
-      </p>
-      <p style="text-align: center;">¡Gracias por usar Drak Asia!</p>
-    </div>
-  </div>
-
-  <script>
-    // Variables
-    const privacyArrow = document.getElementById('privacyArrow');
-    const privacyIcon = document.getElementById('privacyIcon');
-    const privacyModal = document.getElementById('privacyModal');
-    const closeModal = document.getElementById('closeModal');
-
-    // Show/Hide Privacy Icon
-    privacyArrow.addEventListener('click', () => {
-      privacyIcon.classList.toggle('active');
-    });
-
-    // Show Modal
-    privacyIcon.addEventListener('click', () => {
-      privacyModal.classList.add('active');
-    });
-
-    // Close Modal
-    closeModal.addEventListener('click', () => {
-      privacyModal.classList.remove('active');
-    });
-
-    // Close Modal by Clicking Outside
-    window.addEventListener('click', (e) => {
-      if (e.target === privacyModal) {
-        privacyModal.classList.remove('active');
-      }
-    });
-  </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anuncio Oficial</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-      overflow: hidden;
-    }
-
+    /* ===== Anuncio Oficial ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body.announcement-body { overflow: hidden; }
     .announcement {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.8);
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 9999;
     }
-
     .announcement-box {
       background: #fff;
       border-radius: 10px;
@@ -249,38 +143,25 @@
       position: relative;
       animation: slideIn 0.5s ease-in-out;
     }
-
     @keyframes slideIn {
-      from {
-        transform: translateY(-50%);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
+      from { transform: translateY(-50%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
-
     .profile-pic {
-      width: 100px;
-      height: 100px;
+      width: 100px; height: 100px;
       border-radius: 50%;
       margin: 0 auto;
       position: relative;
       border: 3px solid #007bff;
     }
-
     .profile-pic img {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: cover;
       border-radius: 50%;
     }
-
     .verified {
       position: absolute;
-      bottom: -10px;
-      right: -10px;
+      bottom: -10px; right: -10px;
       background: #007bff;
       color: #fff;
       border-radius: 50%;
@@ -288,25 +169,9 @@
       font-size: 14px;
       border: 2px solid #fff;
     }
-
-    h2 {
-      margin-top: 15px;
-      font-size: 24px;
-      color: #333;
-    }
-
-    p {
-      color: #666;
-      margin: 10px 0 20px;
-      font-size: 16px;
-    }
-
-    .welcome {
-      font-size: 18px;
-      color: #007bff;
-      margin-bottom: 20px;
-    }
-
+    h2.announcement-title { margin-top: 15px; font-size: 24px; color: #333; }
+    p.announcement-text { color: #666; margin: 10px 0 20px; font-size: 16px; }
+    .welcome { font-size: 18px; color: #007bff; margin-bottom: 20px; }
     .close-btn {
       background: #007bff;
       color: #fff;
@@ -317,126 +182,26 @@
       cursor: pointer;
       transition: background 0.3s ease;
     }
-
-    .close-btn:hover {
-      background: #0056b3;
-    }
-
+    .close-btn:hover { background: #0056b3; }
     .confetti {
       position: fixed;
-      top: 0;
-      left: 50%;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 50%;
+      width: 100%; height: 100%;
       pointer-events: none;
       z-index: 1000;
     }
-  </style>
-</head>
-<body>
-  <div class="announcement" id="announcement">
-    <div class="announcement-box">
-      <div class="profile-pic">
-        <img src="https://i.imgur.com/vsbX5W9.png" alt="CEO Stephanie Mejias">
-        <span class="verified">
-          <i class="fas fa-check"></i>
-        </span>
-      </div>
-      <h2>Stephanie Mejias</h2>
-      <p class="welcome">¡Bienvenida como la nueva CEO de DrakAsia!</p>
-      <p>Es un honor anunciar oficialmente este gran paso para nuestra empresa.</p>
-      <button class="close-btn" onclick="closeAnnouncement()">Quitar</button>
-    </div>
-  </div>
 
-  <canvas id="confetti" class="confetti"></canvas>
-
-  <script>
-    // Confetti Animation
-    const canvas = document.getElementById('confetti');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const particles = [];
-    const colors = ['#007bff', '#ff4081', '#ffc107', '#4caf50', '#ff5722'];
-
-    function createParticle() {
-      const size = Math.random() * 10 + 5;
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: canvas.height + size,
-        size: size,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        speed: Math.random() * 3 + 2,
-        angle: Math.random() * Math.PI * 2,
-      });
-    }
-
-    function drawParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach((particle, index) => {
-        ctx.fillStyle = particle.color;
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size / 2, 0, Math.PI * 2);
-        ctx.fill();
-        particle.y -= particle.speed;
-        particle.x += Math.sin(particle.angle) * 2;
-        if (particle.y < -particle.size) particles.splice(index, 1);
-      });
-    }
-
-    function loop() {
-      createParticle();
-      drawParticles();
-      requestAnimationFrame(loop);
-    }
-
-    loop();
-
-    // Close Announcement
-    function closeAnnouncement() {
-      document.getElementById('announcement').style.display = 'none';
-      document.getElementById('confetti').style.display = 'none';
-    }
-  </script>
-</body>
-</html>
-
-
-
-
-<!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>Untitled</title>
-  
-
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <title>DrakAsia Premium</title>
-  <style>
-    body {
+    /* ===== DrakAsia Premium ===== */
+    body.premium-body {
       background: linear-gradient(135deg, #6a11cb, #2575fc);
       color: #fff;
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
     }
-
     .icon-button {
       position: fixed;
       bottom: 20px;
-      width: 60px;
-      height: 60px;
+      width: 60px; height: 60px;
       background-color: #ff6f61;
       color: #fff;
       border-radius: 50%;
@@ -449,23 +214,12 @@
       transition: transform 0.3s ease;
       z-index: 1000;
     }
-
-    .icon-button:hover {
-      transform: scale(1.1);
-    }
-
-    .icon-premium {
-      left: 20px;
-    }
-
-    .icon-privacy {
-      left: 100px;
-    }
-
+    .icon-button:hover { transform: scale(1.1); }
+    .icon-premium { left: 20px; }
+    .icon-privacy { left: 100px; }
     .modal {
       position: fixed;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       background: rgba(255, 255, 255, 0.9);
       color: #333;
@@ -478,18 +232,10 @@
       z-index: 1001;
       animation: fadeIn 0.5s ease;
     }
-
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translate(-50%, -60%);
-      }
-      to {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-      }
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
     }
-
     .modal button {
       background-color: #6a11cb;
       color: #fff;
@@ -501,11 +247,7 @@
       margin-top: 20px;
       transition: background-color 0.3s ease;
     }
-
-    .modal button:hover {
-      background-color: #5b0fb4;
-    }
-
+    .modal button:hover { background-color: #5b0fb4; }
     .notification {
       position: fixed;
       top: 20px;
@@ -519,320 +261,364 @@
       z-index: 1002;
       animation: fadeIn 0.5s ease, fadeOut 0.5s 2.5s ease;
     }
+    @keyframes fadeOut { to { opacity: 0; } }
 
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
+    /* ===== K-DramaWiki ===== */
+    body.kdrama-body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: 'Arial', sans-serif;
+      scroll-behavior: smooth;
+    }
+    .series-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .series-card {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      height: 350px;
+      width: 100%;
+    }
+    .series-card:hover { transform: scale(1.05); }
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 1000;
+      overflow-y: auto;
+    }
+    .glowing-border {
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    }
+    .actor-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      justify-items: center;
+      padding: 20px;
+    }
+    .actor-profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      width: 140px;
+      color: #fff;
+    }
+    .actor-profile:hover {
+      transform: translateY(-10px) scale(1.1);
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0, 133, 255, 0.6);
+    }
+    .actor-profile img {
+      border-radius: 20%;
+      width: 140px; height: 140px;
+      object-fit: cover;
+      transition: transform 0.4s ease, border 0.4s ease;
+      border: 3px solid transparent;
+    }
+    .actor-profile:hover img {
+      transform: rotate(-2deg);
+      border: 3px solid #0085ff;
+    }
+    .actor-profile p {
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #aadfff;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+    .star {
+      font-size: 30px;
+      color: #FFD700;
+      cursor: pointer;
+      transition: transform 0.3s ease, color 0.3s ease;
+      text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+    }
+    .star:hover {
+      transform: scale(1.3);
+      color: #FFAA00;
+      text-shadow: 0 0 15px rgba(255, 170, 0, 0.8);
+    }
+    .star.active {
+      color: #FFB400;
+      text-shadow: 0 0 10px rgba(255, 180, 0, 0.7);
+    }
+    @keyframes bounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+    .star.active { animation: bounce 0.5s ease-in-out; }
+    .follow-success {
+      display: none;
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #28a745;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 18px;
+      font-weight: bold;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* ===== Modal Responsive (K-DramaWiki) ===== */
+    @media (max-width: 768px) {
+      /* Se expande el modal de detalle de series a pantalla completa */
+      #seriesDetailModal .container {
+         padding: 0;
+         width: 100%;
+         height: 100%;
+      }
+      #seriesDetailContent {
+         width: 100%;
+         height: 100%;
+         border-radius: 0;
+         margin: 0;
+         padding: 1rem;
       }
     }
   </style>
 </head>
-<body>
-  <!-- Botones -->
-  <div class="icon-button icon-premium" onclick="openPremiumModal()">
-    <i class="fas fa-crown"></i>
-  </div>
-  <div class="icon-button icon-privacy" onclick="togglePrivacy()">
-    <i class="fas fa-user-shield"></i>
-  </div>
+<body class="kdrama-body">
+  <!-- ===== Sección: Política de Privacidad ===== -->
+  <section id="privacy-section">
+    <!-- (Código original sin quitar nada) -->
+    <div class="privacy-arrow" id="privacyArrow">
+      <i class="fas fa-arrow-left"></i>
+    </div>
+    <div class="privacy-icon" id="privacyIcon">
+      <i class="fas fa-shield-alt"></i>
+    </div>
+    <div class="privacy-modal" id="privacyModal">
+      <div class="modal-content">
+        <button class="close-modal" id="closeModal">&times;</button>
+        <h2>Política de Privacidad</h2>
+        <p>
+          Bienvenido a Drak Asia. Esta aplicación tiene como objetivo proporcionar información sobre series coreanas y contenido relacionado. Queremos asegurarte que no recopilamos datos de los usuarios ni requerimos registros.
+        </p>
+        <p><strong>Recopilación de Datos:</strong> No se realiza ninguna recopilación de datos personales. La aplicación es 100% informativa.</p>
+        <p><strong>Uso de Cookies:</strong> No utilizamos cookies ni rastreamos la actividad del usuario.</p>
+        <p><strong>Seguridad:</strong> Aunque no almacenamos información del usuario, mantenemos los estándares de seguridad para garantizar una experiencia confiable.</p>
+        <p style="text-align: center;">¡Gracias por usar Drak Asia!</p>
+      </div>
+    </div>
+  </section>
 
-  <!-- Modal -->
-  <div class="modal" id="premiumModal">
-    <h2>DrakAsia Premium</h2>
-    <p>¡Felicidades! Obtén acceso Premium por 3 meses:</p>
-    <ul>
-      <li>Privacidad mejorada</li>
-      <li>Acceso a nuevos títulos</li>
-      <li>Modo sin conexión</li>
-      <li>Eliminación de anuncios</li>
-    </ul>
-    <button onclick="activatePremium()">Activar Prueba Gratuita</button>
-  </div>
+  <!-- ===== Sección: Anuncio Oficial ===== -->
+  <section id="announcement-section">
+    <div class="announcement" id="announcement">
+      <div class="announcement-box">
+        <div class="profile-pic">
+          <img src="https://i.imgur.com/vsbX5W9.png" alt="CEO Stephanie Mejias">
+          <span class="verified">
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
+        <h2 class="announcement-title">Stephanie Mejias</h2>
+        <p class="welcome">¡Bienvenida como la nueva CEO de DrakAsia!</p>
+        <p class="announcement-text">Es un honor anunciar oficialmente este gran paso para nuestra empresa.</p>
+        <button class="close-btn" onclick="closeAnnouncement()">Quitar</button>
+      </div>
+    </div>
+    <canvas id="confetti" class="confetti"></canvas>
+  </section>
 
-  <!-- Notificaciones -->
-  <div class="notification" id="notification"></div>
+  <!-- ===== Sección: DrakAsia Premium ===== -->
+  <section id="premium-section">
+    <div class="icon-button icon-premium" onclick="openPremiumModal()">
+      <i class="fas fa-crown"></i>
+    </div>
+    <div class="icon-button icon-privacy" onclick="togglePrivacy()">
+      <i class="fas fa-user-shield"></i>
+    </div>
+    <div class="modal" id="premiumModal">
+      <h2>DrakAsia Premium</h2>
+      <p>¡Felicidades! Obtén acceso Premium por 3 meses:</p>
+      <ul>
+        <li>Privacidad mejorada</li>
+        <li>Acceso a nuevos títulos</li>
+        <li>Modo sin conexión</li>
+        <li>Eliminación de anuncios</li>
+      </ul>
+      <button onclick="activatePremium()">Activar Prueba Gratuita</button>
+    </div>
+    <div class="notification" id="notification"></div>
+  </section>
 
+  <!-- ===== Sección: K-DramaWiki ===== -->
+  <section id="kdrama-section">
+    <nav class="fixed top-0 w-full bg-black/50 backdrop-blur-md z-50 p-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-cyan-400"><a href="#seriesFeed">DraK Asia</a></h1>
+      <div class="flex space-x-4">
+        <input type="text" id="searchInput" class="p-2 text-black" placeholder="Buscar por actor o serie...">
+        <button id="searchBtn" class="text-white hover:text-cyan-400">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </nav>
+    <div id="seriesFeed" class="container mx-auto mt-20 p-4">
+      <div id="seriesGrid" class="series-grid">
+        <!-- Las series se insertarán dinámicamente aquí -->
+      </div>
+    </div>
+    <div id="seriesDetailModal" class="modal-overlay hidden">
+      <div class="container mx-auto p-6 relative">
+        <button class="absolute top-4 right-4 text-white hover:text-red-500" id="closeDetailModal">
+          <i class="fas fa-times"></i>
+        </button>
+        <div id="seriesDetailContent" class="bg-gray-800 rounded-lg p-6 relative">
+          <img src="https://cdn-icons-png.flaticon.com/512/7021/7021860.png" id="followIcon" class="absolute top-4 right-4 w-10 h-10 cursor-pointer" alt="Follow Icon">
+          <div id="followSuccess" class="follow-success">¡Seguido con éxito!</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Sección: Moderadores ===== -->
+  <section id="moderators-section">
+    <div id="moderators-icon" class="fixed bottom-4 right-4 bg-cyan-400 p-3 rounded-full cursor-pointer">
+      <img src="https://cdn-icons-png.flaticon.com/256/18262/18262626.png" alt="Moderadores" class="w-8 h-8">
+    </div>
+    <div id="moderators-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+      <div class="bg-gray-800 p-6 rounded-lg w-full h-full max-h-screen overflow-y-auto relative">
+        <button class="absolute top-4 right-4 text-white text-2xl" id="close-modal">
+          <i class="fas fa-times"></i>
+        </button>
+        <h2 class="text-2xl font-bold text-cyan-400 mb-6">Moderadores</h2>
+        <div class="mb-4">
+          <input type="text" id="moderator-search" placeholder="Buscar moderador..." class="w-full p-2 rounded-lg bg-gray-700 text-white">
+        </div>
+        <div id="moderators-list" class="space-y-4"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Scripts ===== -->
   <script>
-    function openPremiumModal() {
-      const isPremiumActive = localStorage.getItem('premiumActive');
-      if (isPremiumActive) {
-        showNotification('Ya tienes Premium activo.');
-      } else {
-        document.getElementById('premiumModal').style.display = 'block';
+    /* --- Política de Privacidad --- */
+    const privacyArrow = document.getElementById('privacyArrow');
+    const privacyIcon = document.getElementById('privacyIcon');
+    const privacyModal = document.getElementById('privacyModal');
+    const closeModal = document.getElementById('closeModal');
+    privacyArrow.addEventListener('click', () => { privacyIcon.classList.toggle('active'); });
+    privacyIcon.addEventListener('click', () => { privacyModal.classList.add('active'); });
+    closeModal.addEventListener('click', () => { privacyModal.classList.remove('active'); });
+    window.addEventListener('click', (e) => { if (e.target === privacyModal) privacyModal.classList.remove('active'); });
+
+    /* --- Anuncio Oficial --- */
+    const canvas = document.getElementById('confetti');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const particles = [];
+      const colors = ['#007bff', '#ff4081', '#ffc107', '#4caf50', '#ff5722'];
+      function createParticle() {
+        const size = Math.random() * 10 + 5;
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: canvas.height + size,
+          size: size,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          speed: Math.random() * 3 + 2,
+          angle: Math.random() * Math.PI * 2,
+        });
       }
+      function drawParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach((particle, index) => {
+          ctx.fillStyle = particle.color;
+          ctx.beginPath();
+          ctx.arc(particle.x, particle.y, particle.size / 2, 0, Math.PI * 2);
+          ctx.fill();
+          particle.y -= particle.speed;
+          particle.x += Math.sin(particle.angle) * 2;
+          if (particle.y < -particle.size) particles.splice(index, 1);
+        });
+      }
+      function loop() { createParticle(); drawParticles(); requestAnimationFrame(loop); }
+      loop();
+    }
+    function closeAnnouncement() {
+      document.getElementById('announcement').style.display = 'none';
+      if (canvas) canvas.style.display = 'none';
     }
 
+    /* --- DrakAsia Premium --- */
+    function openPremiumModal() {
+      const isPremiumActive = localStorage.getItem('premiumActive');
+      if (isPremiumActive) { showNotification('Ya tienes Premium activo.'); }
+      else { document.getElementById('premiumModal').style.display = 'block'; }
+    }
     function activatePremium() {
       localStorage.setItem('premiumActive', 'true');
       localStorage.setItem('premiumStartDate', new Date().toISOString());
       showNotification('¡Prueba gratuita activada!');
       document.getElementById('premiumModal').style.display = 'none';
     }
-
     function togglePrivacy() {
       const currentStatus = localStorage.getItem('privacyStatus') || 'public';
       const newStatus = currentStatus === 'public' ? 'private' : 'public';
       localStorage.setItem('privacyStatus', newStatus);
       showNotification(`Cuenta ahora en modo ${newStatus}.`);
     }
-
     window.addEventListener('offline', () => {
       const isPremiumActive = localStorage.getItem('premiumActive');
-      if (isPremiumActive) {
-        showNotification('Modo sin conexión activado.');
-      } else {
-        document.body.innerHTML = '<h1 style="text-align:center;color:white;margin-top:20%;">Necesitas Premium para modo sin conexión.</h1>';
-      }
+      if (isPremiumActive) { showNotification('Modo sin conexión activado.'); }
+      else { document.body.innerHTML = '<h1 style="text-align:center;color:white;margin-top:20%;">Necesitas Premium para modo sin conexión.</h1>'; }
     });
-
     function showNotification(message) {
       const notification = document.getElementById('notification');
       notification.textContent = message;
       notification.style.display = 'block';
-      setTimeout(() => {
-        notification.style.display = 'none';
-      }, 3000);
+      setTimeout(() => { notification.style.display = 'none'; }, 3000);
     }
-  </script>
-</body>
-</html>
 
-
-<!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>Untitled</title>
-  
-
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K-DramaWiki - Plataforma de Series Coreanas</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #121212;
-            color: #ffffff;
-            font-family: 'Arial', sans-serif;
-            scroll-behavior: smooth;
-        }
-        .series-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-        .series-card {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-            height: 350px;
-            width: 100%;
-        }
-        .series-card:hover {
-            transform: scale(1.05);
-        }
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 1000;
-            overflow-y: auto;
-        }
-        .glowing-border {
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-        }
-       
-.actor-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Tres columnas por fila */
-    gap: 20px; /* Espaciado entre perfiles */
-    justify-items: center; /* Centra cada perfil horizontalmente */
-    padding: 20px;
-}
-
-.actor-profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    width: 140px;
-    color: #fff;
-}
-
-.actor-profile:hover {
-    transform: translateY(-10px) scale(1.1); /* Animación de desplazamiento y zoom */
-    cursor: pointer;
-    box-shadow: 0 8px 20px rgba(0, 133, 255, 0.6); /* Sombra azul vibrante */
-}
-
-.actor-profile img {
-    border-radius: 20%; /* Bordes redondeados estilo Disney+ */
-    width: 140px;
-    height: 140px;
-    object-fit: cover;
-    transition: transform 0.4s ease, border 0.4s ease;
-    border: 3px solid transparent;
-}
-
-.actor-profile:hover img {
-    transform: rotate(-2deg); /* Animación de inclinación */
-    border: 3px solid #0085ff; /* Borde azul vibrante */
-}
-
-.actor-profile p {
-    margin-top: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #aadfff; /* Texto azul claro */
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8); /* Sombras en el texto */
-}
-
-
-        
-
-
-.star {
-    font-size: 30px; /* Tamaño más grande para destacar */
-    color: #FFD700; /* Dorado brillante inicial */
-    cursor: pointer;
-    transition: transform 0.3s ease, color 0.3s ease; /* Transición suave */
-    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5); /* Brillo inicial */
-}
-
-.star:hover {
-    transform: scale(1.3); /* Aumenta de tamaño al pasar el cursor */
-    color: #FFAA00; /* Dorado más intenso */
-    text-shadow: 0 0 15px rgba(255, 170, 0, 0.8); /* Aumenta el brillo */
-}
-
-.star.active {
-    color: #FFB400; /* Color más cálido para estrellas activas */
-    text-shadow: 0 0 10px rgba(255, 180, 0, 0.7); /* Resplandor más visible */
-}
-
-/* Animación de entrada */
-@keyframes bounce {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
-    }
-}
-
-.star.active {
-    animation: bounce 0.5s ease-in-out; /* Rebote cuando una estrella está activa */
-}
-
-
-     
-        .follow-success {
-            display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #28a745;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 18px;
-            font-weight: bold;
-            animation: fadeIn 1s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-    </style>
-</head>
-<body class="bg-gray-900 text-white">
-    <nav class="fixed top-0 w-full bg-black/50 backdrop-blur-md z-50 p-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold text-cyan-400"><a href="#seriesFeed">DraK Asia</a></h1>
-        <div class="flex space-x-4">
-            <input type="text" id="searchInput" class="p-2 text-black" placeholder="Buscar por actor o serie...">
-            <button id="searchBtn" class="text-white hover:text-cyan-400">
-                <i class="fas fa-search"></i>
-            </button>
-        </div>
-    </nav>
-
-    <div id="seriesFeed" class="container mx-auto mt-20 p-4">
-        <div id="seriesGrid" class="series-grid">
-            <!-- Las series se insertarán dinámicamente aquí -->
-        </div>
-    </div>
-
-    <div id="seriesDetailModal" class="modal-overlay hidden">
-        <div class="container mx-auto p-6 relative">
-            <button class="absolute top-4 right-4 text-white hover:text-red-500" id="closeDetailModal">
-                <i class="fas fa-times"></i>
-            </button>
-            <div id="seriesDetailContent" class="bg-gray-800 rounded-lg p-6 relative">
-                <img src="https://cdn-icons-png.flaticon.com/512/7021/7021860.png" id="followIcon" class="absolute top-4 right-4 w-10 h-10 cursor-pointer" alt="Follow Icon">
-                <div id="followSuccess" class="follow-success">¡Seguido con éxito!</div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        class KDramaWiki {
-            constructor() {
-                this.series = [];
-                this.actors = {};
-                this.initEventListeners();
-            }
-
-            initEventListeners() {
-                document.getElementById('closeDetailModal').addEventListener('click', () => this.closeDetailModal());
-                document.getElementById('searchBtn').addEventListener('click', () => this.searchSeries());
-                document.getElementById('searchInput').addEventListener('input', () => this.searchSeries());
-            }
-
-            closeDetailModal() {
-                const modal = document.getElementById('seriesDetailModal');
-                modal.classList.add('hidden');
-            }
-
-            renderSeries(filteredSeries = this.series) {
-                const grid = document.getElementById('seriesGrid');
-                grid.innerHTML = '';
-
-                filteredSeries.forEach(series => {
-                    const seriesCard = document.createElement('div');
-                    seriesCard.classList.add('series-card', 'relative', 'cursor-pointer');
-                    
-                    seriesCard.innerHTML = 
-                        `<img src="${series.coverImage}" class="w-full h-64 object-cover rounded-lg">
+    /* --- K-DramaWiki --- */
+    class KDramaWiki {
+      constructor() {
+        this.series = [];
+        this.actors = {};
+        this.initEventListeners();
+      }
+      initEventListeners() {
+        document.getElementById('closeDetailModal').addEventListener('click', () => this.closeDetailModal());
+        document.getElementById('searchBtn').addEventListener('click', () => this.searchSeries());
+        document.getElementById('searchInput').addEventListener('input', () => this.searchSeries());
+      }
+      closeDetailModal() {
+        const modal = document.getElementById('seriesDetailModal');
+        modal.classList.add('hidden');
+      }
+      renderSeries(filteredSeries = this.series) {
+        const grid = document.getElementById('seriesGrid');
+        grid.innerHTML = '';
+        filteredSeries.forEach(series => {
+          const seriesCard = document.createElement('div');
+          seriesCard.classList.add('series-card', 'relative', 'cursor-pointer');
+          seriesCard.innerHTML = `<img src="${series.coverImage}" class="w-full h-64 object-cover rounded-lg">
                         <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black to-transparent">
                             <h3 class="text-lg font-bold">${series.title}</h3>
                             <p class="text-sm">${series.director}</p>
                         </div>`;
-
-                    seriesCard.addEventListener('click', () => this.showSeriesDetails(series));
-                    grid.appendChild(seriesCard);
-                });
-            }
-
-            showSeriesDetails(series) {
-                const modal = document.getElementById('seriesDetailModal');
-                const content = document.getElementById('seriesDetailContent');
-
-                content.innerHTML = 
-                    `<div class="relative">
+          seriesCard.addEventListener('click', () => this.showSeriesDetails(series));
+          grid.appendChild(seriesCard);
+        });
+      }
+      showSeriesDetails(series) {
+        const modal = document.getElementById('seriesDetailModal');
+        const content = document.getElementById('seriesDetailContent');
+        content.innerHTML = `<div class="relative">
                         <img src="${series.coverImage}" class="w-full h-96 object-cover rounded-lg mb-4 glowing-border">
                         <div class="flex justify-between items-center mb-4">
                             <h2 class="text-3xl font-bold text-cyan-400">${series.title}</h2>
@@ -844,265 +630,156 @@
     <div class="text-white text-sm ml-4">
         <strong>País:</strong> ${series.pais}
     </div>
-
 </div>
 <strong>Año:</strong> ${series.year}
-
                                 <strong>Año:</strong> ${series.year}
                             </div>
                         </div>
                         <p class="text-white mb-4">${series.synopsis}</p>
                         <h3 class="text-xl text-cyan-400 mb-2">Actores</h3>
                         <div class="flex flex-wrap">
-                            ${series.actors.map(actor => 
-                                `<div class="actor-profile" onclick="showActorSeries('${actor.name}')">
+                            ${series.actors.map(actor => `<div class="actor-profile" onclick="showActorSeries('${actor.name}')">
                                     <img src="${actor.photo}" alt="${actor.name}">
                                     <p class="text-white">${actor.name}</p>
-                                </div>`
-                            ).join('')}
+                                </div>`).join('')}
                         </div>
-
                         <h3 class="text-xl text-cyan-400 mb-2 mt-4">Calificación</h3>
                         <div class="stars" id="stars">
-                            ${[1, 2, 3, 4, 5].map(i => 
-                                `<span class="star" data-value="${i}">&#9733;</span>`
-                            ).join('')}
+                            ${[1, 2, 3, 4, 5].map(i => `<span class="star" data-value="${i}">&#9733;</span>`).join('')}
                         </div>
                     </div>`;
-
-                modal.classList.remove('hidden');
-
-                const followIcon = document.getElementById('followIcon');
-                const followSuccess = document.getElementById('followSuccess');
-                followIcon.addEventListener('click', () => {
-                    followSuccess.style.display = 'block';
-                    setTimeout(() => followSuccess.style.display = 'none', 2000);
-                });
-
-                document.querySelectorAll('.star').forEach(star => {
-                    star.addEventListener('click', () => this.rateSeries(star));
-                });
-            }
-
-            rateSeries(star) {
-                const stars = document.querySelectorAll('.star');
-                stars.forEach(st => st.classList.remove('active'));
-                for (let i = 1; i <= star.dataset.value; i++) {
-                    stars[i - 1].classList.add('active');
-                }
-            }
-
-            searchSeries() {
-                const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-                const filteredSeries = this.series.filter(series => 
-                    series.title.toLowerCase().includes(searchTerm) || 
-                    series.actors.some(actor => actor.name.toLowerCase().includes(searchTerm))
-                );
-                this.renderSeries(filteredSeries);
-            }
+        modal.classList.remove('hidden');
+        const followIcon = document.getElementById('followIcon');
+        const followSuccess = document.getElementById('followSuccess');
+        followIcon.addEventListener('click', () => {
+          followSuccess.style.display = 'block';
+          setTimeout(() => { followSuccess.style.display = 'none'; }, 2000);
+        });
+        document.querySelectorAll('.star').forEach(star => {
+          star.addEventListener('click', () => this.rateSeries(star));
+        });
+      }
+      rateSeries(star) {
+        const stars = document.querySelectorAll('.star');
+        stars.forEach(st => st.classList.remove('active'));
+        for (let i = 1; i <= star.dataset.value; i++) {
+          stars[i - 1].classList.add('active');
         }
-
-        const wiki = new KDramaWiki();
-
-        wiki.series = [
-        
-   {
-    "title": "Amor en la puerta de al lado",
-    "director": "Yoo Je-won",
-    "pais": "Corea del Sur",
-    "year": 2024,
-    "synopsis": "Una mujer que intenta rehacer su vida vuelve a Corea y se reencuentra con un amigo de la infancia, con quien comparte una historia complicada.",
-    "coverImage": "https://ultimasnoticias.com.ve/wp-content/uploads/2024/10/LOVE-NEXT-DOOR1-scaled.jpg",
-    "Etiqueta": "Corea del Sur",
-    "actors": [
-        {
-            "name": "Jung Hae-in",
-            "photo": "https://1.vikiplatform.com/l/3069127l/78a2ce69f0.jpg?x=b&s=480x270&e=t&q=g",
-            "role": "Moderador"
-        },
-        {
-            "name": "Jung So-min",
-            "photo": "https://1.vikiplatform.com/pr/14304pr/081b9b2968.jpg?x=b",
-            "role": "Moderador"
-        }
-    ]
-},
-
-      
-
-            {
-                title: "Descendants of the Sun",
-                director: "Lee Eung-bok",
-                year: 2016,
-                synopsis: "Un soldado y una doctora se enamoran mientras enfrentan peligros.",
-                coverImage: "https://images.justwatch.com/poster/202546506/s718/descendants-of-the-sun.jpg",
-                actors: [
-                    { "name": "Song Joong-ki", "photo": "https://1.vikiplatform.com/pr/14866pr/62eb4af4e2.jpg?x=b" },
-  { "name": "Song Hye-kyo", "photo": "https://cdn.antaranews.com/cache/1200x800/2019/04/16/song.jpg" },
-  { "name": "Jin Goo", "photo": "https://1.vikiplatform.com/pr/15589pr/0973e276e0.jpg?x=b" },
-  { "name": "Kim Ji-won", "photo": "https://1.vikiplatform.com/pr/14221pr/6c16816ae3.jpg?x=b" },
-  { "name": "Onew", "photo": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Onew_Marie_Claire_Korea_April_2022.png" },
-  { "name": "Kim Min-seok", "photo": "https://1.vikiplatform.com/pr/15341pr/4185e35ce8.jpg?x=b" }
-                    
-                ]
-            }
-        ];
-
-        wiki.renderSeries();
-    </script>
-</body>
-</html>
-
-<!-- Icono de notificación de moderadores -->
-<div id="moderators-icon" class="fixed bottom-4 right-4 bg-cyan-400 p-3 rounded-full cursor-pointer">
-    <img src="https://cdn-icons-png.flaticon.com/256/18262/18262626.png" alt="Moderadores" class="w-8 h-8">
-</div>
-
-<!-- Modal de moderadores (expandido) -->
-<div id="moderators-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-    <div class="bg-gray-800 p-6 rounded-lg w-full h-full max-h-screen overflow-y-auto relative">
-        <!-- Botón para cerrar el modal -->
-        <button class="absolute top-4 right-4 text-white text-2xl" id="close-modal">
-            <i class="fas fa-times"></i> <!-- Icono de cerrar -->
-        </button>
-        
-        <h2 class="text-2xl font-bold text-cyan-400 mb-6">Moderadores</h2>
-        
-        <!-- Buscador de moderadores -->
-        <div class="mb-4">
-            <input type="text" id="moderator-search" placeholder="Buscar moderador..." class="w-full p-2 rounded-lg bg-gray-700 text-white">
-        </div>
-
-        <!-- Lista de moderadores -->
-        <div id="moderators-list" class="space-y-4"></div>
-    </div>
-</div>
-
-<script>
-    // Datos de moderadores con la cantidad de títulos
-    const moderators = [
-        { name: "Darell Vega", role: "Fundador", titlesCount: 78, imgSrc: "https://m.media-amazon.com/images/S/pv-target-images/80d21af2c4f9fb94460aadf6f0d73b52e91a18d1c9de0fe09e69ac8034a809e9._SX300_.jpg", verified: true },
-        { name: "uchihashisui2024", role: "Fundador", titlesCount: 0, imgSrc: "https://i.redd.it/qg3hmf3u44v91.jpg", verified: true },
-          { name: "Samuel Marin", role: "Fundador", titlesCount: 0, imgSrc: "https://i.pinimg.com/736x/e7/75/ec/e775ecc20a2b9930ca9e7ee62ba05fd7.jpg", verified: true },
-        { name: "Emily Torres", role: "Moderador", titlesCount: 5, imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMcommjJ4uxDMd3Vsus3Nl-6WV_w-w3BUfCA&s", verified: false },
-          { name: "amy-70", role: "Moderador", titlesCount: 33, imgSrc: "https://occ-0-8407-1722.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABbJIAbkjHS4QoHR0rs2bMGYAZLRYbWwpDFdg57FzmnBhyB3rZJ7FL-9HWUPvFWCj-UHxTJRBPuFzTdy6vEBmMmg0UvFJnuiB83AW.jpg?r=f44", verified: false },
-        { name: "Rafael Lauro", role: "Moderador", titlesCount: 0, imgSrc: "https://cdn.pixabay.com/photo/2021/06/07/19/23/kakashi-6318812_1280.jpg", verified: false },
-         
-        { name: "Carlos Méndez", role: "Moderador", titlesCount: 3, imgSrc: "https://i.pinimg.com/736x/0a/64/75/0a64753f3398b81f5898b09463a5e6be.jpg", verified: false },
-         { name: "Taty_395", role: "Moderador", titlesCount: 126, imgSrc: "https://i.mydramalist.com/67r8d_5c.jpg", verified: false },
-        { name: "Sariblood_33", role: "Moderador", titlesCount: 0, imgSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/20220226_Kim_Se-jeong_%EA%B9%80%EC%84%B8%EC%A0%95_for_Marie_Claire_Korea.jpg/170px-20220226_Kim_Se-jeong_%EA%B9%80%EC%84%B8%EC%A0%95_for_Marie_Claire_Korea.jpg", verified: false },
-        { name: "sejo_28", role: "Moderador", titlesCount: 78, imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPHe-4631dB309LoB7ooqusqbNHD2zxk8x3g&s", verified: false },
-        { name: "rp_vp", role: "Moderador", titlesCount: 61, imgSrc: "https://media.vogue.mx/photos/6410cf873f370ce21019f8e6/2:3/w_2560%2Cc_limit/la-gloria-song-hye-kyo.jpg", verified: false }
+      }
+      searchSeries() {
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const filteredSeries = this.series.filter(series =>
+          series.title.toLowerCase().includes(searchTerm) ||
+          series.actors.some(actor => actor.name.toLowerCase().includes(searchTerm))
+        );
+        this.renderSeries(filteredSeries);
+      }
+    }
+    const wiki = new KDramaWiki();
+    wiki.series = [
+      {
+        "title": "Amor en la puerta de al lado",
+        "director": "Yoo Je-won",
+        "pais": "Corea del Sur",
+        "year": 2024,
+        "synopsis": "Una mujer que intenta rehacer su vida vuelve a Corea y se reencuentra con un amigo de la infancia, con quien comparte una historia complicada.",
+        "coverImage": "https://ultimasnoticias.com.ve/wp-content/uploads/2024/10/LOVE-NEXT-DOOR1-scaled.jpg",
+        "Etiqueta": "Corea del Sur",
+        "actors": [
+          { "name": "Jung Hae-in", "photo": "https://1.vikiplatform.com/l/3069127l/78a2ce69f0.jpg?x=b&s=480x270&e=t&q=g", "role": "Moderador" },
+          { "name": "Jung So-min", "photo": "https://1.vikiplatform.com/pr/14304pr/081b9b2968.jpg?x=b", "role": "Moderador" }
+        ]
+      },
+      {
+        title: "Descendants of the Sun",
+        director: "Lee Eung-bok",
+        year: 2016,
+        synopsis: "Un soldado y una doctora se enamoran mientras enfrentan peligros.",
+        coverImage: "https://images.justwatch.com/poster/202546506/s718/descendants-of-the-sun.jpg",
+        actors: [
+          { "name": "Song Joong-ki", "photo": "https://1.vikiplatform.com/pr/14866pr/62eb4af4e2.jpg?x=b" },
+          { "name": "Song Hye-kyo", "photo": "https://cdn.antaranews.com/cache/1200x800/2019/04/16/song.jpg" },
+          { "name": "Jin Goo", "photo": "https://1.vikiplatform.com/pr/15589pr/0973e276e0.jpg?x=b" },
+          { "name": "Kim Ji-won", "photo": "https://1.vikiplatform.com/pr/14221pr/6c16816ae3.jpg?x=b" },
+          { "name": "Onew", "photo": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Onew_Marie_Claire_Korea_April_2022.png" },
+          { "name": "Kim Min-seok", "photo": "https://1.vikiplatform.com/pr/15341pr/4185e35ce8.jpg?x=b" }
+        ]
+      }
     ];
+    wiki.renderSeries();
 
-    // Función para ordenar los moderadores por el número de títulos
-    function sortModeratorsByTitles() {
-        return moderators.sort((a, b) => b.titlesCount - a.titlesCount);
-    }
-
-    // Mostrar moderadores en el modal
+    /* --- Moderadores --- */
+    const moderators = [
+      { name: "Darell Vega", role: "Fundador", titlesCount: 78, imgSrc: "https://m.media-amazon.com/images/S/pv-target-images/80d21af2c4f9fb94460aadf6f0d73b52e91a18d1c9de0fe09e69ac8034a809e9._SX300_.jpg", verified: true },
+      { name: "uchihashisui2024", role: "Fundador", titlesCount: 0, imgSrc: "https://i.redd.it/qg3hmf3u44v91.jpg", verified: true },
+      { name: "Samuel Marin", role: "Fundador", titlesCount: 0, imgSrc: "https://i.pinimg.com/736x/e7/75/ec/e775ecc20a2b9930ca9e7ee62ba05fd7.jpg", verified: true },
+      { name: "Emily Torres", role: "Moderador", titlesCount: 5, imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMcommjJ4uxDMd3Vsus3Nl-6WV_w-w3BUfCA&s", verified: false },
+      { name: "amy-70", role: "Moderador", titlesCount: 33, imgSrc: "https://occ-0-8407-1722.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABbJIAbkjHS4QoHR0rs2bMGYAZLRYbWwpDFdg57FzmnBhyB3rZJ7FL-9HWUPvFWCj-UHxTJRBPuFzTdy6vEBmMmg0UvFJnuiB83AW.jpg?r=f44", verified: false },
+      { name: "Rafael Lauro", role: "Moderador", titlesCount: 0, imgSrc: "https://cdn.pixabay.com/photo/2021/06/07/19/23/kakashi-6318812_1280.jpg", verified: false },
+      { name: "Carlos Méndez", role: "Moderador", titlesCount: 3, imgSrc: "https://i.pinimg.com/736x/0a/64/75/0a64753f3398b81f5898b09463a5e6be.jpg", verified: false },
+      { name: "Taty_395", role: "Moderador", titlesCount: 126, imgSrc: "https://i.mydramalist.com/67r8d_5c.jpg", verified: false },
+      { name: "Sariblood_33", role: "Moderador", titlesCount: 0, imgSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/20220226_Kim_Se-jeong_%EA%B9%80%EC%84%B8%EC%A0%95_for_Marie_Claire_Korea.jpg/170px-20220226_Kim_Se-jeong_%EA%B9%80%EC%84%B8%EC%A0%95_for_Marie_Claire_Korea.jpg", verified: false },
+      { name: "sejo_28", role: "Moderador", titlesCount: 78, imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPHe-4631dB309LoB7ooqusqbNHD2zxk8x3g&s", verified: false },
+      { name: "rp_vp", role: "Moderador", titlesCount: 61, imgSrc: "https://media.vogue.mx/photos/6410cf873f370ce21019f8e6/2:3/w_2560%2Cc_limit/la-gloria-song-hye-kyo.jpg", verified: false }
+    ];
+    function sortModeratorsByTitles() { return moderators.sort((a, b) => b.titlesCount - a.titlesCount); }
     function showModerators(searchQuery = "") {
-        const moderatorsList = document.getElementById('moderators-list');
-        moderatorsList.innerHTML = ""; // Limpiar la lista
-
-        const filteredModerators = sortModeratorsByTitles().filter(moderator => moderator.name.toLowerCase().includes(searchQuery.toLowerCase()));
-
-        filteredModerators.forEach((moderator, index) => {
-            const moderatorItem = document.createElement('div');
-            moderatorItem.className = "flex items-center bg-gray-700 p-4 rounded-lg relative";
-
-            let verificationIcon = moderator.verified 
-                ? `<img src="https://cdn-icons-png.flaticon.com/128/5556/5556625.png" alt="Verificado" class="w-6 h-6 mr-4">`
-                : '';
-            
-            let roleIcon = moderator.role === "Fundador"
-                ? `<img src="https://cdn-icons-png.flaticon.com/512/11476/11476491.png" alt="Fundador" class="w-8 h-8 mr-4 transform scale-125">`  // Etiqueta Fundador destacada
-                : `<img src="https://cdn-icons-png.flaticon.com/128/5556/5556625.png" alt="Moderador" class="w-6 h-6 mr-4">`;
-
-            // Agregar la etiqueta de moderador al lado del nombre
-            const roleLabel = moderator.role === "Moderador" 
-                ? `<span class="bg-cyan-400 text-white px-2 py-1 text-xs rounded-full ml-2">Moderador</span>`
-                : `<span class="bg-red-500 text-white px-2 py-1 text-xs rounded-full ml-2">Fundador</span>`; // Etiqueta de Fundador
-
-            // Mostrar solo el número de títulos con los que ha colaborado
-            const titlesCount = `<span class="text-sm text-gray-300 mt-2">Colaboró con ${moderator.titlesCount} títulos</span>`;
-
-            moderatorItem.innerHTML = `
-                ${roleIcon}
-                <img src="${moderator.imgSrc}" alt="${moderator.name}" class="w-14 h-14 rounded-full object-cover mr-4">
-                <div class="flex-grow">
-                    <p class="font-bold text-lg text-cyan-400">${moderator.name} ${roleLabel}</p>
-                    ${titlesCount}
-                </div>
-                ${verificationIcon}
-            `;
-
-            // Agregar etiquetas de Top 1, Top 2, y Top 3 con animación
-            if (index === 0) {
-                moderatorItem.innerHTML += `
-                    <span class="top-1-label absolute top-2 left-2 bg-yellow-500 text-white px-3 py-1 text-xs rounded-full">Top 1</span>
-                `;
-            } else if (index === 1) {
-                moderatorItem.innerHTML += `
-                    <span class="top-2-label absolute top-2 left-2 bg-silver-500 text-white px-3 py-1 text-xs rounded-full">Top 2</span>
-                `;
-            } else if (index === 2) {
-                moderatorItem.innerHTML += `
-                    <span class="top-3-label absolute top-2 left-2 bg-bronze-500 text-white px-3 py-1 text-xs rounded-full">Top 3</span>
-                `;
-            }
-
-            moderatorsList.appendChild(moderatorItem);
-        });
-
-        // Estilos y animaciones para las etiquetas
-        const top1 = document.querySelectorAll('.top-1-label');
-        const top2 = document.querySelectorAll('.top-2-label');
-        const top3 = document.querySelectorAll('.top-3-label');
-        
-        top1.forEach(el => {
-            el.classList.add('animate__animated', 'animate__bounceIn');
-        });
-        top2.forEach(el => {
-            el.classList.add('animate__animated', 'animate__bounceIn');
-        });
-        top3.forEach(el => {
-            el.classList.add('animate__animated', 'animate__bounceIn');
-        });
+      const moderatorsList = document.getElementById('moderators-list');
+      moderatorsList.innerHTML = "";
+      const filteredModerators = sortModeratorsByTitles().filter(moderator => moderator.name.toLowerCase().includes(searchQuery.toLowerCase()));
+      filteredModerators.forEach((moderator, index) => {
+        const moderatorItem = document.createElement('div');
+        moderatorItem.className = "flex items-center bg-gray-700 p-4 rounded-lg relative";
+        let verificationIcon = moderator.verified 
+            ? `<img src="https://cdn-icons-png.flaticon.com/128/5556/5556625.png" alt="Verificado" class="w-6 h-6 mr-4">`
+            : '';
+        let roleIcon = moderator.role === "Fundador"
+            ? `<img src="https://cdn-icons-png.flaticon.com/512/11476/11476491.png" alt="Fundador" class="w-8 h-8 mr-4 transform scale-125">`
+            : `<img src="https://cdn-icons-png.flaticon.com/128/5556/5556625.png" alt="Moderador" class="w-6 h-6 mr-4">`;
+        const roleLabel = moderator.role === "Moderador" 
+            ? `<span class="bg-cyan-400 text-white px-2 py-1 text-xs rounded-full ml-2">Moderador</span>`
+            : `<span class="bg-red-500 text-white px-2 py-1 text-xs rounded-full ml-2">Fundador</span>`;
+        const titlesCount = `<span class="text-sm text-gray-300 mt-2">Colaboró con ${moderator.titlesCount} títulos</span>`;
+        moderatorItem.innerHTML = `
+            ${roleIcon}
+            <img src="${moderator.imgSrc}" alt="${moderator.name}" class="w-14 h-14 rounded-full object-cover mr-4">
+            <div class="flex-grow">
+                <p class="font-bold text-lg text-cyan-400">${moderator.name} ${roleLabel}</p>
+                ${titlesCount}
+            </div>
+            ${verificationIcon}
+        `;
+        if (index === 0) {
+          moderatorItem.innerHTML += `<span class="top-1-label absolute top-2 left-2 bg-yellow-500 text-white px-3 py-1 text-xs rounded-full">Top 1</span>`;
+        } else if (index === 1) {
+          moderatorItem.innerHTML += `<span class="top-2-label absolute top-2 left-2 bg-silver-500 text-white px-3 py-1 text-xs rounded-full">Top 2</span>`;
+        } else if (index === 2) {
+          moderatorItem.innerHTML += `<span class="top-3-label absolute top-2 left-2 bg-bronze-500 text-white px-3 py-1 text-xs rounded-full">Top 3</span>`;
+        }
+        moderatorsList.appendChild(moderatorItem);
+      });
+      const top1 = document.querySelectorAll('.top-1-label');
+      const top2 = document.querySelectorAll('.top-2-label');
+      const top3 = document.querySelectorAll('.top-3-label');
+      top1.forEach(el => { el.classList.add('animate__animated', 'animate__bounceIn'); });
+      top2.forEach(el => { el.classList.add('animate__animated', 'animate__bounceIn'); });
+      top3.forEach(el => { el.classList.add('animate__animated', 'animate__bounceIn'); });
     }
-
-    // Mostrar modal de moderadores al hacer clic en el icono
     document.getElementById('moderators-icon').addEventListener('click', () => {
-        showModerators();
-        document.getElementById('moderators-modal').classList.remove('hidden');
-        // Evitar el scroll de la página
-        document.body.style.overflow = 'hidden';
+      showModerators();
+      document.getElementById('moderators-modal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
     });
-
-    // Cerrar el modal de moderadores
     document.getElementById('close-modal').addEventListener('click', () => {
-        document.getElementById('moderators-modal').classList.add('hidden');
-        // Permitir el scroll nuevamente
-        document.body.style.overflow = 'auto';
+      document.getElementById('moderators-modal').classList.add('hidden');
+      document.body.style.overflow = 'auto';
     });
-
-    // Función para buscar moderadores por nombre
     document.getElementById('moderator-search').addEventListener('input', (event) => {
-        const searchQuery = event.target.value;
-        showModerators(searchQuery);
+      const searchQuery = event.target.value;
+      showModerators(searchQuery);
     });
-
-    // Mostrar los moderadores al cargar la página
     window.onload = showModerators;
-</script>
-
-<!-- Animaciones CSS -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-<!-- partial -->
-  
-</body>
-</html>
-<!-- partial -->
-  
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
 </body>
 </html>
