@@ -372,20 +372,165 @@
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     /* ===== Modal Responsive (K-DramaWiki) ===== */
-    @media (max-width: 768px) {
-      /* Se expande el modal de detalle de series a pantalla completa */
-      #seriesDetailModal .container {
-         padding: 0;
-         width: 100%;
-         height: 100%;
+    /* Modal siempre en pantalla completa */
+    #seriesDetailModal {
+       position: fixed;
+       top: 0;
+       left: 0;
+       width: 100vw;
+       height: 100vh;
+       background: rgba(0,0,0,0.95);
+       z-index: 1000;
+       overflow-y: auto;
+    }
+    
+    #seriesDetailModal .container {
+       padding: 0;
+       width: 100%;
+       height: auto;
+       min-height: 100vh;
+    }
+    
+    #seriesDetailContent {
+       width: 100%;
+       height: auto;
+       min-height: 100vh;
+       border-radius: 0;
+       margin: 0;
+       padding: 0;
+       background: #111;
+    }
+
+    /* Animaciones de seguimiento mejoradas */
+    @keyframes followSuccess {
+      0% { 
+        opacity: 0; 
+        transform: translate(-50%, -50%) scale(0.5); 
       }
-      #seriesDetailContent {
-         width: 100%;
-         height: 100%;
-         border-radius: 0;
-         margin: 0;
-         padding: 1rem;
+      50% { 
+        opacity: 1; 
+        transform: translate(-50%, -50%) scale(1.1); 
       }
+      100% { 
+        opacity: 1; 
+        transform: translate(-50%, -50%) scale(1); 
+      }
+    }
+
+    @keyframes checkIcon {
+      0% { 
+        transform: scale(0); 
+        opacity: 0; 
+      }
+      50% { 
+        transform: scale(1.3); 
+        opacity: 1; 
+      }
+      100% { 
+        transform: scale(1); 
+        opacity: 1; 
+      }
+    }
+
+    @keyframes buttonFollowed {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .follow-notification {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, #1da1f2, #0d8bd9);
+      color: white;
+      padding: 20px 30px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      z-index: 2000;
+      box-shadow: 0 8px 25px rgba(29, 161, 242, 0.4);
+      animation: followSuccess 0.5s ease-out;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .check-icon {
+      width: 20px;
+      height: 20px;
+      background: #1da1f2;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: checkIcon 0.5s ease-out;
+      border: 2px solid white;
+    }
+
+    .actor-follow-btn {
+      transition: all 0.3s ease;
+    }
+
+    .actor-follow-btn.followed {
+      background: #1da1f2 !important;
+      color: white !important;
+      border-color: #1da1f2 !important;
+      animation: buttonFollowed 0.4s ease-out;
+    }
+
+    .series-follow-btn {
+      transition: all 0.3s ease;
+    }
+
+    .series-follow-btn.followed {
+      color: #1da1f2 !important;
+    }
+
+    .series-follow-btn.followed .w-10 {
+      background: rgba(29, 161, 242, 0.1) !important;
+    }
+
+    .series-follow-btn.followed i {
+      color: #1da1f2 !important;
+      animation: checkIcon 0.5s ease-out;
+    }
+
+    /* ===== Estilos adicionales para Twitter-like ===== */
+    .star {
+      transition: all 0.2s ease;
+    }
+    .star:hover {
+      transform: scale(1.1);
+    }
+    .star.active {
+      color: #FFD700 !important;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+
+    /* Botones de acción estilo Twitter */
+    .twitter-action-btn {
+      transition: all 0.2s ease;
+    }
+    .twitter-action-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    /* Scrollbar personalizada para el modal */
+    #seriesDetailContent::-webkit-scrollbar {
+      width: 8px;
+    }
+    #seriesDetailContent::-webkit-scrollbar-track {
+      background: #1a1a1a;
+    }
+    #seriesDetailContent::-webkit-scrollbar-thumb {
+      background: #404040;
+      border-radius: 4px;
+    }
+    #seriesDetailContent::-webkit-scrollbar-thumb:hover {
+      background: #555;
     }
   </style>
 </head>
@@ -472,9 +617,9 @@
       </div>
     </div>
     <div id="seriesDetailModal" class="modal-overlay hidden">
-      <div class="container mx-auto p-6 relative">
-        <button class="absolute top-4 right-4 text-white hover:text-red-500" id="closeDetailModal">
-          <i class="fas fa-times"></i>
+      <div class="container mx-auto relative">
+        <button class="fixed top-4 right-4 text-white hover:text-red-500 z-50 bg-black/50 w-10 h-10 rounded-full flex items-center justify-center" id="closeDetailModal">
+          <i class="fas fa-times text-xl"></i>
         </button>
         <div id="seriesDetailContent" class="bg-gray-800 rounded-lg p-6 relative">
           <img src="https://cdn-icons-png.flaticon.com/512/7021/7021860.png" id="followIcon" class="absolute top-4 right-4 w-10 h-10 cursor-pointer" alt="Follow Icon">
@@ -584,6 +729,56 @@
       setTimeout(() => { notification.style.display = 'none'; }, 3000);
     }
 
+    /* --- Funciones de seguimiento --- */
+    function followSeries(button) {
+      if (!button.classList.contains('followed')) {
+        button.classList.add('followed');
+        button.innerHTML = `
+          <div class="w-10 h-10 bg-blue-500/10 rounded-full flex items-center justify-center">
+            <i class="fas fa-check text-lg text-blue-400"></i>
+          </div>
+          <span class="text-base font-medium text-blue-400">Siguiendo</span>
+        `;
+        
+        showFollowNotification('¡Serie agregada a tu lista!', 'series');
+      }
+    }
+
+    function followActor(button, actorName) {
+      if (!button.classList.contains('followed')) {
+        button.classList.add('followed');
+        button.innerHTML = 'Siguiendo';
+        
+        showFollowNotification(`¡Ahora sigues a ${actorName}!`, 'actor');
+      }
+    }
+
+    function showFollowNotification(message, type) {
+      // Crear notificación
+      const notification = document.createElement('div');
+      notification.className = 'follow-notification';
+      
+      const icon = document.createElement('div');
+      icon.className = 'check-icon';
+      icon.innerHTML = '<i class="fas fa-check" style="color: white; font-size: 10px;"></i>';
+      
+      const text = document.createElement('span');
+      text.textContent = message;
+      
+      notification.appendChild(icon);
+      notification.appendChild(text);
+      document.body.appendChild(notification);
+      
+      // Remover después de 2.5 segundos
+      setTimeout(() => {
+        notification.style.opacity = '0';
+        notification.style.transform = 'translate(-50%, -50%) scale(0.9)';
+        setTimeout(() => {
+          notification.remove();
+        }, 300);
+      }, 2000);
+    }
+
     /* --- K-DramaWiki --- */
     class KDramaWiki {
       constructor() {
@@ -618,36 +813,106 @@
       showSeriesDetails(series) {
         const modal = document.getElementById('seriesDetailModal');
         const content = document.getElementById('seriesDetailContent');
-        content.innerHTML = `<div class="relative">
-                        <img src="${series.coverImage}" class="w-full h-96 object-cover rounded-lg mb-4 glowing-border">
-                        <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-3xl font-bold text-cyan-400">${series.title}</h2>
-                       </div>
-<div class="flex items-center mb-4">
-    <div class="text-white text-sm">
-        <strong>Director:</strong> ${series.director}
-    </div>
-    <div class="text-white text-sm ml-4">
-        <strong>País:</strong> ${series.pais}
-    </div>
-</div>
-<strong>Año:</strong> ${series.year}
-                                <strong>Año:</strong> ${series.year}
-                            </div>
-                        </div>
-                        <p class="text-white mb-4">${series.synopsis}</p>
-                        <h3 class="text-xl text-cyan-400 mb-2">Actores</h3>
-                        <div class="flex flex-wrap">
-                            ${series.actors.map(actor => `<div class="actor-profile" onclick="showActorSeries('${actor.name}')">
-                                    <img src="${actor.photo}" alt="${actor.name}">
-                                    <p class="text-white">${actor.name}</p>
-                                </div>`).join('')}
-                        </div>
-                        <h3 class="text-xl text-cyan-400 mb-2 mt-4">Calificación</h3>
-                        <div class="stars" id="stars">
-                            ${[1, 2, 3, 4, 5].map(i => `<span class="star" data-value="${i}">&#9733;</span>`).join('')}
-                        </div>
-                    </div>`;
+        content.innerHTML = `
+          <!-- Header estilo Twitter -->
+          <div class="flex items-center p-4 border-b border-gray-700">
+            <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full flex items-center justify-center mr-3">
+              <i class="fas fa-tv text-white text-lg"></i>
+            </div>
+            <div class="flex-1">
+              <h2 class="text-xl font-bold text-white">${series.title}</h2>
+              <p class="text-gray-400 text-sm">Serie • ${series.year}</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <button class="w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded-full flex items-center justify-center transition-colors">
+                <i class="fas fa-share text-gray-300 text-sm"></i>
+              </button>
+              <button class="w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded-full flex items-center justify-center transition-colors">
+                <i class="fas fa-bookmark text-gray-300 text-sm"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Imagen principal -->
+          <div class="relative">
+            <img src="${series.coverImage}" class="w-full h-80 object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          </div>
+
+          <!-- Contenido principal -->
+          <div class="p-4">
+            <!-- Información básica -->
+            <div class="flex items-center space-x-4 mb-4 text-sm text-gray-400">
+              <span class="flex items-center">
+                <i class="fas fa-user-tie mr-1 text-cyan-400"></i>
+                ${series.director}
+              </span>
+              <span class="flex items-center">
+                <i class="fas fa-flag mr-1 text-cyan-400"></i>
+                ${series.pais || 'Corea del Sur'}
+              </span>
+              <span class="flex items-center">
+                <i class="fas fa-calendar mr-1 text-cyan-400"></i>
+                ${series.year}
+              </span>
+            </div>
+
+            <!-- Sinopsis -->
+            <p class="text-white text-base leading-relaxed mb-6">${series.synopsis}</p>
+
+            <!-- Acciones principales -->
+            <div class="flex items-center justify-center space-x-8 py-4 border-t border-b border-gray-700 mb-6">
+              <button class="flex items-center space-x-2 text-gray-400 hover:text-red-500 transition-colors group">
+                <div class="w-10 h-10 group-hover:bg-red-500/10 rounded-full flex items-center justify-center transition-colors">
+                  <i class="far fa-heart text-lg"></i>
+                </div>
+                <span class="text-base font-medium">Me gusta</span>
+              </button>
+              <button class="series-follow-btn flex items-center space-x-2 text-gray-400 hover:text-cyan-400 transition-colors group" onclick="followSeries(this)">
+                <div class="w-10 h-10 group-hover:bg-cyan-400/10 rounded-full flex items-center justify-center transition-colors">
+                  <i class="fas fa-plus text-lg"></i>
+                </div>
+                <span class="text-base font-medium">Seguir serie</span>
+              </button>
+            </div>
+
+            <!-- Actores estilo Twitter -->
+            <div class="mb-6">
+              <h3 class="text-lg font-semibold text-white mb-4 flex items-center">
+                <i class="fas fa-users mr-2 text-cyan-400"></i>
+                Reparto principal
+              </h3>
+              <div class="space-y-3">
+                ${series.actors.map(actor => `
+                  <div class="flex items-center space-x-3 p-3 hover:bg-gray-800/50 rounded-lg transition-colors cursor-pointer">
+                    <img src="${actor.photo}" alt="${actor.name}" class="w-12 h-12 rounded-full object-cover border-2 border-gray-600">
+                    <div class="flex-1">
+                      <p class="text-white font-medium">${actor.name}</p>
+                      <p class="text-gray-400 text-sm">${actor.role || 'Actor principal'}</p>
+                    </div>
+                    <button class="actor-follow-btn text-cyan-400 hover:text-cyan-300 text-sm font-medium transition-colors px-3 py-1 rounded-full border border-cyan-400 hover:border-cyan-300" onclick="followActor(this, '${actor.name}')">
+                      Seguir
+                    </button>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Calificación estilo Twitter -->
+            <div class="border-t border-gray-700 pt-4">
+              <h3 class="text-lg font-semibold text-white mb-3 flex items-center">
+                <i class="fas fa-star mr-2 text-yellow-400"></i>
+                Tu calificación
+              </h3>
+              <div class="flex items-center space-x-2">
+                <div class="stars flex space-x-1" id="stars">
+                  ${[1, 2, 3, 4, 5].map(i => `<span class="star text-2xl cursor-pointer hover:scale-110 transition-transform text-gray-400 hover:text-yellow-400" data-value="${i}">★</span>`).join('')}
+                </div>
+                <span class="text-gray-400 text-sm ml-3">Califica esta serie</span>
+              </div>
+            </div>
+          </div>
+        `;
         modal.classList.remove('hidden');
         const followIcon = document.getElementById('followIcon');
         const followSuccess = document.getElementById('followSuccess');
@@ -661,10 +926,24 @@
       }
       rateSeries(star) {
         const stars = document.querySelectorAll('.star');
-        stars.forEach(st => st.classList.remove('active'));
-        for (let i = 1; i <= star.dataset.value; i++) {
-          stars[i - 1].classList.add('active');
-        }
+        const rating = parseInt(star.dataset.value);
+        
+        stars.forEach((st, index) => {
+          st.classList.remove('active');
+          if (index < rating) {
+            st.classList.add('active');
+          }
+        });
+        
+        // Mostrar feedback visual
+        const feedback = document.createElement('div');
+        feedback.className = 'fixed top-4 right-4 bg-cyan-500 text-white px-4 py-2 rounded-lg z-50 animate-pulse';
+        feedback.textContent = `¡Calificaste con ${rating} estrella${rating !== 1 ? 's' : ''}!`;
+        document.body.appendChild(feedback);
+        
+        setTimeout(() => {
+          feedback.remove();
+        }, 2000);
       }
       searchSeries() {
         const searchTerm = document.getElementById('searchInput').value.toLowerCase();
