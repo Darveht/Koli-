@@ -417,13 +417,43 @@
       }
     }
 
+    @keyframes followSuccessMobile {
+      0% { 
+        opacity: 0; 
+        transform: translate(-50%, -50%) scale(0.7); 
+      }
+      50% { 
+        opacity: 1; 
+        transform: translate(-50%, -50%) scale(1.05); 
+      }
+      100% { 
+        opacity: 1; 
+        transform: translate(-50%, -50%) scale(1); 
+      }
+    }
+
     @keyframes checkIcon {
       0% { 
         transform: scale(0); 
         opacity: 0; 
       }
       50% { 
-        transform: scale(1.3); 
+        transform: scale(1.2); 
+        opacity: 1; 
+      }
+      100% { 
+        transform: scale(1); 
+        opacity: 1; 
+      }
+    }
+
+    @keyframes checkIconMobile {
+      0% { 
+        transform: scale(0); 
+        opacity: 0; 
+      }
+      50% { 
+        transform: scale(1.1); 
         opacity: 1; 
       }
       100% { 
@@ -434,7 +464,13 @@
 
     @keyframes buttonFollowed {
       0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes buttonFollowedMobile {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
       100% { transform: scale(1); }
     }
 
@@ -456,6 +492,7 @@
       align-items: center;
       gap: 12px;
       border: 2px solid rgba(255, 255, 255, 0.2);
+      max-width: 90vw;
     }
 
     .check-icon {
@@ -468,6 +505,7 @@
       justify-content: center;
       animation: checkIcon 0.5s ease-out;
       border: 2px solid white;
+      flex-shrink: 0;
     }
 
     .actor-follow-btn {
@@ -496,6 +534,75 @@
     .series-follow-btn.followed i {
       color: #1da1f2 !important;
       animation: checkIcon 0.5s ease-out;
+    }
+
+    /* Estilos específicos para móviles */
+    @media (max-width: 768px) {
+      .follow-notification {
+        padding: 16px 20px;
+        font-size: 14px;
+        border-radius: 10px;
+        gap: 10px;
+        animation: followSuccessMobile 0.6s ease-out;
+        margin: 0 10px;
+      }
+
+      .check-icon {
+        width: 18px;
+        height: 18px;
+        animation: checkIconMobile 0.6s ease-out;
+      }
+
+      .actor-follow-btn {
+        font-size: 13px;
+        padding: 6px 12px;
+      }
+
+      .actor-follow-btn.followed {
+        animation: buttonFollowedMobile 0.5s ease-out;
+      }
+
+      .series-follow-btn {
+        font-size: 14px;
+      }
+
+      .series-follow-btn .w-10 {
+        width: 36px !important;
+        height: 36px !important;
+      }
+
+      .series-follow-btn i {
+        font-size: 16px;
+      }
+
+      /* Optimización para táctil */
+      .actor-follow-btn:active {
+        transform: scale(0.98);
+      }
+
+      .series-follow-btn:active {
+        transform: scale(0.98);
+      }
+    }
+
+    /* Estilos para pantallas muy pequeñas */
+    @media (max-width: 480px) {
+      .follow-notification {
+        padding: 12px 16px;
+        font-size: 13px;
+        gap: 8px;
+        max-width: 85vw;
+      }
+
+      .check-icon {
+        width: 16px;
+        height: 16px;
+      }
+
+      .actor-follow-btn {
+        font-size: 12px;
+        padding: 5px 10px;
+      }
     }
 
     /* ===== Estilos adicionales para Twitter-like ===== */
@@ -823,14 +930,7 @@
               <h2 class="text-xl font-bold text-white">${series.title}</h2>
               <p class="text-gray-400 text-sm">Serie • ${series.year}</p>
             </div>
-            <div class="flex items-center space-x-2">
-              <button class="w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded-full flex items-center justify-center transition-colors">
-                <i class="fas fa-share text-gray-300 text-sm"></i>
-              </button>
-              <button class="w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded-full flex items-center justify-center transition-colors">
-                <i class="fas fa-bookmark text-gray-300 text-sm"></i>
-              </button>
-            </div>
+            
           </div>
 
           <!-- Imagen principal -->
@@ -982,6 +1082,234 @@
           { "name": "Kim Ji-won", "photo": "https://1.vikiplatform.com/pr/14221pr/6c16816ae3.jpg?x=b" },
           { "name": "Onew", "photo": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Onew_Marie_Claire_Korea_April_2022.png" },
           { "name": "Kim Min-seok", "photo": "https://1.vikiplatform.com/pr/15341pr/4185e35ce8.jpg?x=b" }
+        ]
+      },
+      {
+        title: "Crash Landing on You",
+        director: "Lee Jeong-hyo",
+        year: 2019,
+        synopsis: "Una heredera surcoreana aterriza accidentalmente en Corea del Norte donde conoce a un oficial del ejército.",
+        coverImage: "https://m.media-amazon.com/images/M/MV5BYzNlZWY3ZTMtMTlkNy00OWI4LWJlOGMtNGU3MmNlZjlkZDYxXkEyXkFqcGc@._V1_.jpg",
+        actors: [
+          { "name": "Hyun Bin", "photo": "https://1.vikiplatform.com/pr/14257pr/6b8c1e07d7.jpg?x=b" },
+          { "name": "Son Ye-jin", "photo": "https://1.vikiplatform.com/pr/14256pr/088f82b1b8.jpg?x=b" },
+          { "name": "Seo Ji-hye", "photo": "https://1.vikiplatform.com/pr/14259pr/c88066b2e9.jpg?x=b" }
+        ]
+      },
+      {
+        title: "Goblin",
+        director: "Lee Eung-bok",
+        year: 2016,
+        synopsis: "Un inmortal duende busca a su novia humana para poder descansar en paz eternamente.",
+        coverImage: "https://m.media-amazon.com/images/M/MV5BZWNmMWMzNDMtMGNmZC00NTUzLWE5YWEtMGJjNzBlNWVhMTQ5XkEyXkFqcGc@._V1_.jpg",
+        actors: [
+          { "name": "Gong Yoo", "photo": "https://1.vikiplatform.com/pr/14255pr/7db91e71b1.jpg?x=b" },
+          { "name": "Kim Go-eun", "photo": "https://1.vikiplatform.com/pr/14254pr/4a9b7c2d90.jpg?x=b" },
+          { "name": "Lee Dong-wook", "photo": "https://1.vikiplatform.com/pr/14253pr/9e8f5a4b31.jpg?x=b" }
+        ]
+      },
+      {
+        title: "Boys Over Flowers",
+        director: "Jeon Ki-sang",
+        year: 2009,
+        synopsis: "Una estudiante de clase trabajadora se infiltra en una escuela de élite donde conoce a los chicos más populares.",
+        coverImage: "https://m.media-amazon.com/images/M/MV5BMTU3MjczNTg5MF5BMl5BanBnXkFtZTgwNzA5MjE2MDE@._V1_.jpg",
+        actors: [
+          { "name": "Lee Min-ho", "photo": "https://1.vikiplatform.com/pr/14252pr/a1b2c3d4e5.jpg?x=b" },
+          { "name": "Ku Hye-sun", "photo": "https://1.vikiplatform.com/pr/14251pr/f6g7h8i9j0.jpg?x=b" },
+          { "name": "Kim Hyun-joong", "photo": "https://1.vikiplatform.com/pr/14250pr/k1l2m3n4o5.jpg?x=b" }
+        ]
+      },
+      {
+        title: "Squid Game",
+        director: "Hwang Dong-hyuk",
+        year: 2021,
+        synopsis: "Personas desesperadas compiten en juegos infantiles mortales por un premio multimillonario.",
+        coverImage: "https://m.media-amazon.com/images/M/MV5BYWE3MDVkN2EtNjQ5MS00ZDQ4LTliNzYtMjc2YWMzMDEwMTA3XkEyXkFqcGc@._V1_.jpg",
+        actors: [
+          { "name": "Lee Jung-jae", "photo": "https://1.vikiplatform.com/pr/14249pr/p1q2r3s4t5.jpg?x=b" },
+          { "name": "Park Hae-soo", "photo": "https://1.vikiplatform.com/pr/14248pr/u6v7w8x9y0.jpg?x=b" },
+          { "name": "Wi Ha-jun", "photo": "https://1.vikiplatform.com/pr/14247pr/z1a2b3c4d5.jpg?x=b" }
+        ]
+      },
+      {
+        title: "Hotel del Luna",
+        director: "Oh Choong-hwan",
+        year: 2019,
+        synopsis: "Una CEO maldita dirige un hotel para espíritus en el centro de Seúl junto a un gerente humano.",
+        coverImage: "https://m.media-amazon.com/images/M/MV5BMjE2MjA5MjE5NV5BMl5BanBnXkFtZTgwNzE5MzE3NzM@._V1_.jpg",
+        actors: [
+          { "name": "IU", "photo": "https://1.vikiplatform.com/pr/14246pr/e6f7g8h9i0.jpg?x=b" },
+          { "name": "Yeo Jin-goo", "photo": "https://1.vikiplatform.com/pr/14245pr/j1k2l3m4n5.jpg?x=b" },
+          { "name": "Shin Jung-geun", "photo": "https://1.vikiplatform.com/pr/14244pr/o6p7q8r9s0.jpg?x=b" }
+        ]
+      },
+      {
+        title: "What's Wrong with Secretary Kim",
+        director: "Park Joon-hwa",
+        year: 2018,
+        synopsis: "Un CEO narcisista intenta reconquistar a su perfecta secretaria cuando ella decide renunciar.",
+        coverImage: "https://m.media-amazon.com/images/M/MV5BYzlhNDEzY2EtZDIyYS00NGU3LWI5ZTEtY2I5MzgwNWY0MWY3XkEyXkFqcGc@._V1_.jpg",
+        actors: [
+          { "name": "Park Seo-joon", "photo": "https://1.vikiplatform.com/pr/14243pr/t1u2v3w4x5.jpg?x=b" },
+          { "name": "Park Min-young", "photo": "https://1.vikiplatform.com/pr/14242pr/y6z7a8b9c0.jpg?x=b" },
+          { "name": "Lee Tae-hwan", "photo": "https://1.vikiplatform.com/pr/14241pr/d1e2f3g4h5.jpg?x=b" }
+        ]
+      },
+      {
+        title: "Kingdom",
+        director: "Kim Seong-hun",
+        year: 2019,
+        synopsis: "En la dinastía Joseon, un príncipe investiga una misteriosa plaga que convierte a las personas en zombis.",
+        coverImage: "https://m.media-amazon.com/images/M/MV5BM2Q5MmVkNjMtNjM5Yi00MjJkLWJhOWEtNWY2YWQyOGY5YzljXkEyXkFqcGc@._V1_.jpg",
+        actors: [
+          { "name": "Ju Ji-hoon", "photo": "https://1.vikiplatform.com/pr/14240pr/i6j7k8l9m0.jpg?x=b" },
+          { "name": "Bae Doona", "photo": "https://1.vikiplatform.com/pr/14239pr/n1o2p3q4r5.jpg?x=b" },
+          { "name": "Ryu Seung-ryong", "photo": "https://1.vikiplatform.com/pr/14238pr/s6t7u8v9w0.jpg?x=b" }
+        ]
+      },
+      {
+        title: "Reply 1988",
+        director: "Shin Won-ho",
+        year: 2015,
+        synopsis: "Cinco amigos crecen juntos en el barrio de Ssangmun durante los Juegos Olímpicos de Seúl de 1988.",
+        coverImage: "https://m.media-amazon.com/images/M/MV5BNzMzOTFjM2EtNWViYy00YmQxLWFhMWQtMzI2MjIzMDZkOTgxXkEyXkFqcGc@._V1_.jpg",
+        actors: [
+          { "name": "Lee Hye-ri", "photo": "https://1.vikiplatform.com/pr/14237pr/x1y2z3a4b5.jpg?x=b" },
+          { "name": "Park Bo-gum", "photo": "https://1.vikiplatform.com/pr/14236pr/c6d7e8f9g0.jpg?x=b" },
+          { "name": "Go Kyung-pyo", "photo": "https://1.vikiplatform.com/pr/14235pr/h1i2j3k4l5.jpg?x=b" }
+        ]
+      },
+      {
+        title: "My Love from the Star",
+        director: "Jang Tae-yoo",
+        year: 2013,
+        synopsis: "Un extraterrestre que ha vivido en la Tierra por 400 años se enamora de una actriz famosa.",
+        coverImage: "https://m.media-amazon.com/images/M/MV5BNzlhOGUxN2UtYTI1ZC00MWQ4LWE4NGEtY2UyOTQ3YjFkOTJiXkEyXkFqcGc@._V1_.jpg",
+        actors: [
+          { "name": "Kim Soo-hyun", "photo": "https://1.vikiplatform.com/pr/14234pr/m6n7o8p9q0.jpg?x=b" },
+          { "name": "Jun Ji-hyun", "photo": "https://1.vikiplatform.com/pr/14233pr/r1s2t3u4v5.jpg?x=b" },
+          { "name": "Park Hae-jin", "photo": "https://1.vikiplatform.com/pr/14232pr/w6x7y8z9a0.jpg?x=b" }
+        ]
+      },
+      {
+        title: "Secret Garden",
+        director: "Shin Woo-chul",
+        year: 2010,
+        synopsis: "Un CEO arrogante y una especialista en acrobacias intercambian cuerpos misteriosamente.",
+        coverImage: "https://m.media-amazon.com/images/M/MV5BYzI3NWI0ZDctZjE4ZS00NGVhLWJkNjEtZGU1YmY0NGRlOGRmXkEyXkFqcGc@._V1_.jpg",
+        actors: [
+          { "name": "Hyun Bin", "photo": "https://1.vikiplatform.com/pr/14231pr/b1c2d3e4f5.jpg?x=b" },
+          { "name": "Ha Ji-won", "photo": "https://1.vikiplatform.com/pr/14230pr/g6h7i8j9k0.jpg?x=b" },
+          { "name": "Yoon Sang-hyun", "photo": "https://1.vikiplatform.com/pr/14229pr/l1m2n3o4p5.jpg?x=b" }
+        ]
+      },
+      {
+        title: "The Heirs",
+        director: "Kang Shin-hyo",
+        year: 2013,
+        synopsis: "Herederos de familias adineradas navegan por el amor y la rivalidad en una escuela de élite.",
+        coverImage: "https://m.media-amazon.com/images/M/MV5BMjEzNjg1MTk5NV5BMl5BanBnXkFtZTgwNjE4MzE1MDE@._V1_.jpg",
+        actors: [
+          { "name": "Lee Min-ho", "photo": "https://1.vikiplatform.com/pr/14228pr/q6r7s8t9u0.jpg?x=b" },
+          { "name": "Park Shin-hye", "photo": "https://1.vikiplatform.com/pr/14227pr/v1w2x3y4z5.jpg?x=b" },
+          { "name": "Kim Woo-bin", "photo": "https://1.vikiplatform.com/pr/14226pr/a6b7c8d9e0.jpg?x=b" }
+        ]
+      },
+      {
+        title: "Coffee Prince",
+        director: "Lee Yoon-jung",
+        year: 2007,
+        synopsis: "Una chica se disfraza de hombre para trabajar en una cafetería y se enamora de su jefe.",
+        coverImage: "https://m.media-amazon.com/images/M/MV5BNjg3NDg2NjYxNF5BMl5BanBnXkFtZTgwMDI4MzE2MDE@._V1_.jpg",
+        actors: [
+          { "name": "Gong Yoo", "photo": "https://1.vikiplatform.com/pr/14225pr/f1g2h3i4j5.jpg?x=b" },
+          { "name": "Yoon Eun-hye", "photo": "https://1.vikiplatform.com/pr/14224pr/k6l7m8n9o0.jpg?x=b" },
+          { "name": "Lee Sun-kyun", "photo": "https://1.vikiplatform.com/pr/14223pr/p1q2r3s4t5.jpg?x=b" }
+        ]
+      },
+      {
+        title: "Itaewon Class",
+        director: "Kim Sung-yoon",
+        year: 2020,
+        synopsis: "Un joven busca venganza contra una corporación alimentaria mientras construye su propio imperio de restaurantes.",
+        coverImage: "https://m.media-amazon.com/images/M/MV5BNzQ3NTdmNzEtNzkwNi00OTZjLTliMGYtNzU5MTBjNGJlZGEyXkEyXkFqcGc@._V1_.jpg",
+        actors: [
+          { "name": "Park Seo-joon", "photo": "https://1.vikiplatform.com/pr/14222pr/u6v7w8x9y0.jpg?x=b" },
+          { "name": "Kim Da-mi", "photo": "https://1.vikiplatform.com/pr/14221pr/z1a2b3c4d5.jpg?x=b" },
+          { "name": "Yoo Jae-myung", "photo": "https://1.vikiplatform.com/pr/14220pr/e6f7g8h9i0.jpg?x=b" }
+        ]
+      },
+      {
+        title: "Strong Woman Do Bong-soon",
+        director: "Lee Hyung-min",
+        year: 2017,
+        synopsis: "Una mujer con fuerza sobrehumana protege a su jefe mientras persigue a un secuestrador.",
+        coverImage: "https://m.media-amazon.com/images/M/MV5BMjg2ODg1Nzc1MV5BMl5BanBnXkFtZTgwNDE5MzE2ODE@._V1_.jpg",
+        actors: [
+          { "name": "Park Bo-young", "photo": "https://1.vikiplatform.com/pr/14219pr/j1k2l3m4n5.jpg?x=b" },
+          { "name": "Park Hyung-sik", "photo": "https://1.vikiplatform.com/pr/14218pr/o6p7q8r9s0.jpg?x=b" },
+          { "name": "Ji Soo", "photo": "https://1.vikiplatform.com/pr/14217pr/t1u2v3w4x5.jpg?x=b" }
+        ]
+      },
+      {
+        title: "W: Two Worlds",
+        director: "Jung Dae-yoon",
+        year: 2016,
+        synopsis: "Una doctora es transportada al mundo de un webtoon donde conoce al protagonista.",
+        coverImage: "https://m.media-amazon.com/images/M/MV5BYzE4ODg2NjgtNzI1Yi00MGJhLWJlOWEtNTMwZjFjZTYxYzVhXkEyXkFqcGc@._V1_.jpg",
+        actors: [
+          { "name": "Lee Jong-suk", "photo": "https://1.vikiplatform.com/pr/14216pr/y6z7a8b9c0.jpg?x=b" },
+          { "name": "Han Hyo-joo", "photo": "https://1.vikiplatform.com/pr/14215pr/d1e2f3g4h5.jpg?x=b" },
+          { "name": "Kim Eui-sung", "photo": "https://1.vikiplatform.com/pr/14214pr/i6j7k8l9m0.jpg?x=b" }
+        ]
+      },
+      {
+        title: "Business Proposal",
+        director: "Park Seon-ho",
+        year: 2022,
+        synopsis: "Una empleada se hace pasar por su mejor amiga en una cita a ciegas con su CEO.",
+        coverImage: "https://m.media-amazon.com/images/M/MV5BNzY2OTg2YjktMzFmZi00MDIyLWE3MTYtMGZlOWJhN2U1NzViXkEyXkFqcGc@._V1_.jpg",
+        actors: [
+          { "name": "Ahn Hyo-seop", "photo": "https://1.vikiplatform.com/pr/14213pr/n1o2p3q4r5.jpg?x=b" },
+          { "name": "Kim Se-jeong", "photo": "https://1.vikiplatform.com/pr/14212pr/s6t7u8v9w0.jpg?x=b" },
+          { "name": "Kim Min-gue", "photo": "https://1.vikiplatform.com/pr/14211pr/x1y2z3a4b5.jpg?x=b" }
+        ]
+      },
+      {
+        title: "True Beauty",
+        director: "Kim Sang-hyeop",
+        year: 2020,
+        synopsis: "Una estudiante insegura se transforma con maquillaje y navega por el amor en la preparatoria.",
+        coverImage: "https://m.media-amazon.com/images/M/MV5BNGZmOTg3YzktYmYxOC00NGE3LWJhOWItMTJlNWNjMjI3NjgyXkEyXkFqcGc@._V1_.jpg",
+        actors: [
+          { "name": "Moon Ga-young", "photo": "https://1.vikiplatform.com/pr/14210pr/c6d7e8f9g0.jpg?x=b" },
+          { "name": "Cha Eun-woo", "photo": "https://1.vikiplatform.com/pr/14209pr/h1i2j3k4l5.jpg?x=b" },
+          { "name": "Hwang In-yeop", "photo": "https://1.vikiplatform.com/pr/14208pr/m6n7o8p9q0.jpg?x=b" }
+        ]
+      },
+      {
+        title: "Hometown's Embrace",
+        director: "Yoon Je-won",
+        year: 2021,
+        synopsis: "Un dentista de la ciudad regresa a su pueblo natal donde se reencuentra con su primer amor.",
+        coverImage: "https://m.media-amazon.com/images/M/MV5BYjE4NzI2YzYtOWYzOS00MWQ3LWI2YzQtNzRjYzAwOTgxMTJlXkEyXkFqcGc@._V1_.jpg",
+        actors: [
+          { "name": "Kim Seon-ho", "photo": "https://1.vikiplatform.com/pr/14207pr/r1s2t3u4v5.jpg?x=b" },
+          { "name": "Shin Min-a", "photo": "https://1.vikiplatform.com/pr/14206pr/w6x7y8z9a0.jpg?x=b" },
+          { "name": "Lee Sang-yi", "photo": "https://1.vikiplatform.com/pr/14205pr/b1c2d3e4f5.jpg?x=b" }
+        ]
+      },
+      {
+        title: "Start-Up",
+        director: "Oh Choong-hwan",
+        year: 2020,
+        synopsis: "Jóvenes emprendedores persiguen sus sueños en el competitivo mundo de las startups tecnológicas.",
+        coverImage: "https://m.media-amazon.com/images/M/MV5BYjIzOTgzMzMtMWUwZi00MzIxLTk1NGEtZGJlYzJhYTBjYzJlXkEyXkFqcGc@._V1_.jpg",
+        actors: [
+          { "name": "Bae Suzy", "photo": "https://1.vikiplatform.com/pr/14204pr/g6h7i8j9k0.jpg?x=b" },
+          { "name": "Nam Joo-hyuk", "photo": "https://1.vikiplatform.com/pr/14203pr/l1m2n3o4p5.jpg?x=b" },
+          { "name": "Kim Seon-ho", "photo": "https://1.vikiplatform.com/pr/14202pr/q6r7s8t9u0.jpg?x=b" }
         ]
       }
     ];
